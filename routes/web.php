@@ -1,19 +1,12 @@
 <?php
 
+use App\Livewire\Pages\About;
+use App\Livewire\Pages\Contacts;
+use App\Livewire\Pages\Home;
+use App\Livewire\Pages\Product;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/about', function () {
-    return view('about');
-});
-
-Route::get('/product', function () {
-    return view('product');
-});
-
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/', Home::class)->name('home');
+Route::get('/product', Product::class)->name('product');
+Route::get('/about', About::class)->name('about');
+Route::get('/contacts', Contacts::class)->name('contacts');
