@@ -1,11 +1,13 @@
 <main class="[&:not(:first-child)]:*:border-t [&:not(:first-child)]:*:border-black">
     {{-- Hero --}}
-    <div class="max-h-[800px] h-full">
-        <img src="{{ asset('/assets/hero-homepage-prodotti.jpg') }}" class="h-auto object-cover">
-    </div>
+    <x-items.section hasSpace={{ false }}>
+        <div class="max-h-[800px] h-full">
+            <img src="{{ asset('/assets/hero-homepage-prodotti.jpg') }}" class="h-auto object-cover">
+        </div>
+    </x-items.section>
 
     {{-- Image in text --}}
-    <section class="py-16">
+    <x-items.section>
         <div class="max-w-[1230px] mx-auto px-4">
             <p>Facciamo un patto. <img src="{{ asset('/assets/image-in-text-1.jpg') }}" width="157px" height="auto"
                     class="h-auto inline-block">
@@ -14,18 +16,18 @@
                     class="h-auto inline-block"> a stare bene.
             </p>
         </div>
-    </section>
+    </x-items.section>
 
     {{-- La nostra filosofia --}}
-    <section>
+    <x-items.section hasSpace={{ false }}>
         <div class="bg-consider text-center flex flex-col items-center gap-4 py-9">
             <p>La nostra filosofia</p>
             <a href="#" class="text-white bg-orange rounded-full uppercase font-bold py-2 px-7">Scopri di più</a>
         </div>
-    </section>
+    </x-items.section>
 
     {{-- Lista prodotti --}}
-    <section class="py-16">
+    <x-items.section>
         <div class="max-w-[1230px] mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-11">
                 {{-- Card 1 - Bilanciata --}}
@@ -122,15 +124,13 @@
                 </div>
             </div>
         </div>
-    </section>
+    </x-items.section>
 
     {{-- Box - Focus ingredienti --}}
-    <section class="py-14 bg-orange text-white">
+    <x-items.section class="bg-orange text-white">
         <div class="max-w-[1230px] mx-auto px-4">
             <div class="grid items-center grid-cols-2 gap-x-20">
                 <img src="{{ asset('/assets/focus-ingredienti.jpg') }}" class="object-cover size-full">
-
-
                 <div class="">
                     <h4 class="mb-6">Focus ingredienti di alta qualità</h4>
                     <div class="max-w-[446px]">
@@ -143,15 +143,15 @@
                 </div>
             </div>
         </div>
-    </section>
+    </x-items.section>
 
     {{-- CTA --}}
-    <section class="py-14">
+    <x-items.section>
         <div class="max-w-[1230px] mx-auto px-4">
             <div class="text-center">
                 <p class="mb-6">Vuoi saperne di più<br /> sui nostri prodotti.</p>
                 <a href="#" class="text-white bg-orange rounded-full uppercase font-bold py-2 px-7">Contattaci</a>
             </div>
         </div>
-    </section>
+    </x-items.section>
 </main>

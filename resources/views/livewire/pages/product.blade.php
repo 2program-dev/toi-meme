@@ -1,6 +1,6 @@
 <main class="[&:not(:first-child)]:*:border-t [&:not(:first-child)]:*:border-black">
     {{-- Product description --}}
-    <section>
+    <x-items.section hasSpace={{ false }}>
         <div class="grid grid-cols-2 bg-cream">
             {{-- Product image --}}
             <div class="aspect-square"></div>
@@ -52,10 +52,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </x-items.section>
 
     {{-- Box - Focus ingredienti --}}
-    <section class="py-14">
+    <x-items.section>
         <div class="max-w-[1230px] mx-auto px-4">
             <div class="grid items-center grid-cols-2 gap-x-20">
                 <div class="">
@@ -72,5 +72,43 @@
                 <img src="{{ asset('/assets/focus-ingredienti.jpg') }}" class="object-cover size-full">
             </div>
         </div>
-    </section>
+    </x-items.section>
+
+    {{-- Prodotti correlati --}}
+    <x-items.section>
+        <div class="max-w-[1230px] mx-auto px-4">
+            <div class="text-center mb-8">
+                <p class="uppercase underline underline-offset-8">Prodotti</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-11">
+                {{-- Card 1 - Bilanciata --}}
+                <div class="grid grid-rows-subgrid row-span-2 gap-y-0">
+                    <div class="grid place-items-center bg-brown aspect-square">
+                        <img src="{{ asset('/assets/products/bilanciata.png') }}" class="size-full object-cover">
+                    </div>
+                    <div class="py-5 px-2 border-y grid place-items-center">
+                        <div class="text-center">
+                            <p class="font-bold">Bilanciata</p>
+                            <p class="font-light">Bruciagrassi</p>
+                            <p class="font-light">€ 30.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Card 2 - Depurata --}}
+                <div class="grid grid-rows-subgrid row-span-2 gap-y-0">
+                    <div class="grid place-items-center bg-consider aspect-square">
+                        <img src="{{ asset('/assets/products/depurata.png') }}" class="size-full object-cover">
+                    </div>
+                    <div class="py-5 px-2 border-y grid place-items-center">
+                        <div class="text-center">
+                            <p class="font-bold">Depurata</p>
+                            <p class="font-light">Bruciagrassi</p>
+                            <p class="font-light">€ 30.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </x-items.section>
 </main>
