@@ -1,4 +1,4 @@
-<main class="[&:not(:first-child)]:*:border-t [&:not(:first-child)]:*:border-black">
+<x-items.main>
     {{-- Hero --}}
     <x-items.section hasSpace={{ false }}>
         <div class="max-h-[800px] h-full">
@@ -154,4 +154,4 @@
             </div>
         </div>
     </x-items.section>
-</main>
+</x-items.main>

@@ -1,4 +1,4 @@
-<main class="[&:not(:first-child)]:*:border-t [&:not(:first-child)]:*:border-black">
+<x-items.main>
     {{-- Product description --}}
     <x-items.section hasSpace={{ false }}>
         <div class="grid grid-cols-2 bg-cream">
@@ -111,4 +111,4 @@
             </div>
         </div>
     </x-items.section>
-</main>
+</x-items.main>

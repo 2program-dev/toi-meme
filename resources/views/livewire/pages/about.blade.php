@@ -1,3 +1,5 @@
-<div>
-    {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
-</div>
+<x-items.main>
+    <x-items.section>
+        <p>about</p>
+    </x-items.section>
+</x-items.main>
