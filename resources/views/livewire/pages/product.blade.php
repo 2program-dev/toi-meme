@@ -1,6 +1,6 @@
-<x-items.main>
+<x-utilities.main>
     {{-- Product description --}}
-    <x-items.section hasSpace={{ false }}>
+    <x-utilities.section hasSpace={{ false }}>
         <div class="grid grid-cols-2 bg-cream">
             {{-- Product image --}}
             <div class="aspect-square"></div>
@@ -20,11 +20,11 @@
                         <p class="mb-4">Type</p>
                         <div class="flex items-center gap-6">
                             {{-- Selector - Bustine --}}
-                            <x-items.type-selector image="/type-selector-bustine.png" title="Bustine" id="type-bustine"
+                            <x-utilities.type-selector image="/type-selector-bustine.png" title="Bustine" id="type-bustine"
                                 name="product-selector" />
 
-                            <x-items.type-selector image="/type-selector-pillole.png" title="Pillole" id="type-pillole"
-                                name="product-selector" />
+                            <x-utilities.type-selector image="/type-selector-pillole.png" title="Pillole"
+                                id="type-pillole" name="product-selector" />
                         </div>
                     </div>
 
@@ -52,11 +52,11 @@
                 </div>
             </div>
         </div>
-    </x-items.section>
+    </x-utilities.section>
 
     {{-- Box - Focus ingredienti --}}
-    <x-items.section>
-        <div class="max-w-[1230px] mx-auto px-4">
+    <x-utilities.section>
+        <x-utilities.container>
             <div class="grid items-center grid-cols-2 gap-x-20">
                 <div class="">
                     <h4 class="mb-6">Focus ingredienti di alta qualità</h4>
@@ -71,12 +71,12 @@
 
                 <img src="{{ asset('/assets/focus-ingredienti.jpg') }}" class="object-cover size-full">
             </div>
-        </div>
-    </x-items.section>
+        </x-utilities.container>
+    </x-utilities.section>
 
     {{-- Prodotti correlati --}}
-    <x-items.section>
-        <div class="max-w-[1230px] mx-auto px-4">
+    <x-utilities.section>
+        <x-utilities.container>
             <div class="text-center mb-8">
                 <p class="uppercase underline underline-offset-8">Prodotti</p>
             </div>
@@ -109,6 +109,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </x-items.section>
-</x-items.main>
+        </x-utilities.container>
+    </x-utilities.section>
+</x-utilities.main>
