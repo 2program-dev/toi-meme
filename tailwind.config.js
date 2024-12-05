@@ -11,6 +11,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ["PPObjectSans", ...defaultTheme.fontFamily.sans],
+                mono: ["'Poppins'", ...defaultTheme.fontFamily.mono]
             },
         },
         colors: {

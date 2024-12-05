@@ -8,6 +8,13 @@
     @vite('resources/css/app.css')
 
     <title>{{ $title ?? config('app.name') }}</title>
+
+    {{-- Google font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body class="">
@@ -40,7 +47,7 @@
 
     {{ $slot }}
 
-    <footer class="bg-cream text-orange py-8 border-t border-black">
+    <footer class="bg-cream text-orange py-8 border-t border-black font-mono">
         <div class="max-w-[1230px] mx-auto px-4">
             <div class="flex justify-between gap-4 items-start">
                 <img src="{{ asset('/assets/toi-meme-logo-orange.svg') }}" width="323px" height="auto"
@@ -48,7 +55,7 @@
 
                 <div class="flex flex-col gap-4 text-right">
 
-                    <ul>
+                    <ul class="font-medium">
                         <li><b>Toi Meme</b></li>
                         <li>xxxxxxx</li>
                         <li>xxxxxxxxxxxxx</li>
@@ -71,16 +78,16 @@
             </div>
 
             <div class="flex justify-between gap-4 mt-10">
-                <small class="font-bold">©2024 Loremipsum. All rights reserved</small>
+                <small class="font-semibold">©2024 Loremipsum. All rights reserved</small>
 
                 <ul class="flex items-center justify-end gap-8">
                     <li>
-                        <a href="#" class="font-bold">
+                        <a href="#" class="font-semibold">
                             Privacy Policy
                         </a>
                     </li>
                     <li>
-                        <a href="" class="font-bold">
+                        <a href="" class="font-semibold">
                             Terms & Condition
                         </a>
                     </li>
