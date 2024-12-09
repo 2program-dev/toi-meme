@@ -8,11 +8,11 @@
             </div>
 
             {{-- Product description --}}
-            <div class="py-9 px-12">
-                <div class="max-w-[564px]">
+            <div class="py-9 px-4 lg:px-12">
+                <div class="lg:max-w-[564px]">
                     {{-- Title and subtitle --}}
                     <div class="mb-8 space-y-3">
-                        <h1 class="~sm/lg:~text-xl/2xl font-serif italic font-normal">Depurata</h1>
+                        <h1 class="~sm/lg:~text-1xl/2xl font-serif italic font-normal">Depurata</h1>
                         <p>Drenante</p>
                         <p>€ 30,00 - quantità minima 200pz</p>
                     </div>
@@ -32,28 +32,28 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col lg:flex-row items-center gap-4 mt-12">
+                    <div class="flex flex-wrap lg:flex-row items-center gap-4 mt-12">
                         {{-- Select options --}}
                         <div
-                            class="relative gap-2 border border-black rounded-full min-w-[154px] h-[52px] grid-cols-1 items-center after:w-4 after:h-2 after:block after:bg-black">
-                            <select class="appearance-none bg-transparent px-5 py-3 size-full">
+                            class="grid grid-cols-1 overflow-hidden grid-rows-1 items-center gap-2 border border-black rounded-full min-w-[154px] h-[52px] after:block after:row-span-full after:col-span-full after:w-[17px] after:h-[10px] after:pointer-events-none after:justify-self-end after:mr-4 after:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNyIgaGVpZ2h0PSIxMCIgZmlsbD0ibm9uZSI+PHBhdGggc3Ryb2tlPSIjMDAwIiBkPSJNMTYgMSA4LjY4MyA5IDEgMSIvPjwvc3ZnPg==')]">
+                            <select
+                                class="cursor-pointer appearance-none bg-transparent px-5 py-3 pr-9 size-full leading-none row-span-full col-span-full">
                                 <option value="100">100</option>
                                 <option value="200">200</option>
                                 <option value="300">300</option>
                             </select>
-                            {{-- <x-icons.arrow-bottom-line width="16" height="16" /> --}}
                         </div>
                         {{-- Select options --}}
 
-
-                        <button class="text-white uppercase bg-orange rounded-full font-bold py-2 px-7">Aggiungi al
-                            carrello</button>
+                        <div class="lg:min-w-[375px] *:w-full">
+                            <x-utilities.button tag="button">Aggiungi al carrello</x-utilities.button>
+                        </div>
                     </div>
 
                     {{-- Descrizione --}}
                     <div class="mt-8">
                         <div x-data="{ tab: 'tab1' }">
-                            <div class="flex items-center flex-wrap gap-x-8 gap-y-4">
+                            <div class="flex flex-wrap items-center flex-wrap gap-x-8 gap-y-4">
                                 <button :class="{ 'underline underline-offset-8 !decoration-black': tab == 'tab1' }"
                                     @click.prevent="tab = 'tab1'"
                                     class="uppercase decoration-transparent transition-colors duration-500">Descrizione</button>
@@ -66,7 +66,7 @@
                             <div class="mt-4 grid grid-cols-1 *:col-span-full *:row-span-full">
                                 <div x-show="tab == 'tab1'" x-transition.opacity x-transition.duration.300ms>
                                     <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                        Tab 1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                         Lorem Ipsum has been the industry's, Lorem Ipsum is simply dummy text of the
                                         printing and typesetting industry. Lorem Ipsum has been the industry's,
                                         Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -75,7 +75,8 @@
                                 </div>
                                 <div x-show="tab == 'tab2'" x-transition.opacity x-transition.duration.300ms>
                                     <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                        Tab 2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                        Lorem
                                         Ipsum has been the industry's, Lorem Ipsum is simply dummy text of the printing
                                         and typesetting industry. Lorem Ipsum has been the industry's, Lorem Ipsum is
                                         simply dummy text of the printing and typesetting industry....
@@ -120,34 +121,13 @@
             <div class="text-center mb-8">
                 <p class="uppercase underline underline-offset-8">Prodotti</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-11">
-                {{-- Card 1 - Bilanciata --}}
-                <div class="grid grid-rows-subgrid row-span-2 gap-y-0">
-                    <div class="grid place-items-center bg-brown aspect-square">
-                        <img src="{{ asset('/assets/products/bilanciata.png') }}" class="size-full object-cover">
-                    </div>
-                    <div class="py-5 px-2 border-y grid place-items-center">
-                        <div class="text-center">
-                            <p class="font-bold">Bilanciata</p>
-                            <p class="font-light">Bruciagrassi</p>
-                            <p class="font-light">€ 30.00</p>
-                        </div>
-                    </div>
-                </div>
 
-                {{-- Card 2 - Depurata --}}
-                <div class="grid grid-rows-subgrid row-span-2 gap-y-0">
-                    <div class="grid place-items-center bg-consider aspect-square">
-                        <img src="{{ asset('/assets/products/depurata.png') }}" class="size-full object-cover">
-                    </div>
-                    <div class="py-5 px-2 border-y grid place-items-center">
-                        <div class="text-center">
-                            <p class="font-bold">Depurata</p>
-                            <p class="font-light">Bruciagrassi</p>
-                            <p class="font-light">€ 30.00</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-11">
+                <x-utilities.card color="brown" image="/assets/products/bilanciata.png" title="Bilanciata"
+                    subtitle="Bruciagrassi" price="30.00" />
+
+                <x-utilities.card color="consider" image="/assets/products/depurata.png" title="Depurata"
+                    subtitle="Bruciagrassi" price="30.00" />
             </div>
         </x-utilities.container>
     </x-utilities.section>

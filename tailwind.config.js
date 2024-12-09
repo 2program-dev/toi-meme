@@ -37,6 +37,8 @@ export default {
         },
         colors: {
             orange: '#FF5C35',
+            'orange-300': '#ff9571',
+            'orange-500': '#fe3511',
             consider: '#E3BCA0',
             cream: '#F2E9E3',
             brown: '#3A1400',

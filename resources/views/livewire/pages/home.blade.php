@@ -23,47 +23,14 @@
     <x-utilities.section>
         <x-utilities.container>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-11">
-                {{-- Card 1 - Bilanciata --}}
-                <a href="#" class="grid grid-rows-subgrid row-span-2 gap-y-0">
-                    <div class="grid place-items-center bg-brown aspect-square">
-                        <img src="{{ asset('/assets/products/bilanciata.png') }}" class="size-full object-cover">
-                    </div>
-                    <div class="py-5 px-2 border-y grid place-items-center">
-                        <div class="text-center">
-                            <p class="font-bold">Bilanciata</p>
-                            <p class="font-light">Bruciagrassi</p>
-                            <p class="font-light">€ 30.00</p>
-                        </div>
-                    </div>
-                </a>
+                <x-utilities.card color="brown" image="/assets/products/bilanciata.png" title="Bilanciata"
+                    subtitle="Bruciagrassi" price="30.00" />
 
-                {{-- Card 2 - Depurata --}}
-                <a href="#" class="grid grid-rows-subgrid row-span-2 gap-y-0">
-                    <div class="grid place-items-center bg-consider aspect-square">
-                        <img src="{{ asset('/assets/products/depurata.png') }}" class="size-full object-cover">
-                    </div>
-                    <div class="py-5 px-2 border-y grid place-items-center">
-                        <div class="text-center">
-                            <p class="font-bold">Depurata</p>
-                            <p class="font-light">Bruciagrassi</p>
-                            <p class="font-light">€ 30.00</p>
-                        </div>
-                    </div>
-                </a>
+                <x-utilities.card color="consider" image="/assets/products/depurata.png" title="Depurata"
+                    subtitle="Bruciagrassi" price="30.00" />
 
-                {{-- Card 3 - Rinvigorita --}}
-                <a href="#" class="grid grid-rows-subgrid row-span-2 gap-y-0">
-                    <div class="grid place-items-center bg-reinvigorated aspect-square">
-                        <img src="{{ asset('/assets/products/rinvigorita.png') }}" class="size-full object-cover">
-                    </div>
-                    <div class="py-5 px-2 border-y grid place-items-center">
-                        <div class="text-center">
-                            <p class="font-bold">Rinvigorita</p>
-                            <p class="font-light">Bruciagrassi</p>
-                            <p class="font-light">€ 30.00</p>
-                        </div>
-                    </div>
-                </a>
+                <x-utilities.card color="reinvigorated" image="/assets/products/rinvigorita.png" title="Rinvigorita"
+                    subtitle="Bruciagrassi" price="30.00" />
 
                 {{-- Box full --}}
                 <div class="col-span-full max-h-[421px] overflow-hidden bg-consider">
@@ -71,22 +38,12 @@
                 </div>
 
                 {{-- Card 4 - Raggiante --}}
-                <a href="#" class="grid grid-rows-subgrid row-span-2 gap-y-0">
-                    <div class="grid place-items-center bg-radiant aspect-square">
-                        <img src="{{ asset('/assets/products/raggiante.png') }}" class="size-full object-cover">
-                    </div>
-                    <div class="py-5 px-2 border-y grid place-items-center" class="size-full object-cover">
-                        <div class="text-center">
-                            <p class="font-bold">Raggiante</p>
-                            <p class="font-light">Bruciagrassi</p>
-                            <p class="font-light">€ 30.00</p>
-                        </div>
-                    </div>
-                </a>
+                <x-utilities.card color="radiant" image="/assets/products/raggiante.png" title="Raggiante"
+                    subtitle="Bruciagrassi" price="30.00" />
 
                 {{-- Box - Banner --}}
                 <div class="grid row-span-2 bg-grey">
-                    <div class="py-5 px-2 grid place-items-center">
+                    <div class="py-5 px-4 grid place-items-center">
                         <div class="text-center space-y-4">
                             <p class="~sm/lg:~text-xl/2xl leading-none">
                                 <span class="font-serif italic font-bold">Banner</span> informazioni
@@ -100,25 +57,12 @@
                             <div class="mt-6">
                                 <x-utilities.button border size="sm">Lascia la mail</x-utilities.button>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
 
-                {{-- Card 3 - Energica --}}
-                <a href="#" class="grid grid-rows-subgrid row-span-2 gap-y-0">
-                    <div class="grid place-items-center bg-energetic aspect-square">
-                        <img src="{{ asset('/assets/products/energica.png') }}" class="size-full object-cover">
-                    </div>
-                    <div class="py-5 px-2 border-y grid place-items-center">
-                        <div class="text-center">
-                            <p class="font-bold">Energica</p>
-                            <p class="font-light">Bruciagrassi</p>
-                            <p class="font-light">€ 30.00</p>
-                        </div>
-                    </div>
-                </a>
+                <x-utilities.card color="energetic" image="/assets/products/energica.png" title="Energica"
+                    subtitle="Bruciagrassi" price="30.00" />
             </div>
         </x-utilities.container>
     </x-utilities.section>
@@ -128,7 +72,7 @@
         <x-utilities.container>
             <div class="flex flex-col md:flex-row md:items-center gap-x-20 gap-y-4">
                 <div class="basis-1/2">
-                    <img src="{{ asset('/assets/focus-ingredienti.jpg') }}" class="object-cover size-full">
+                    <img src="{{ asset('/assets/focus-ingredienti.jpg') }}" class="object-contain size-full">
                 </div>
                 <div class="basis-1/2">
                     <div class="~sm/lg:~mb-4/6">
