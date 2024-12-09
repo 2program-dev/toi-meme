@@ -6,6 +6,6 @@
     <div class="transition-colors border border-black text-center flex flex-col items-center rounded-3xl pb-2 mt-4">
         <img src="{{ asset('/assets/' . $image) }}" width="110px" height="110px"
             class="-translate-y-4 aspect-square max-h-24 object-contain">
-        <p class="font-light">{{ $title }}</p>
+        <p class="font-light text-base">{{ $title }}</p>
     </div>
 </label>
