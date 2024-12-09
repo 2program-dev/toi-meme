@@ -58,11 +58,7 @@
 
                         <button type="button" @click.prevent="open = true"
                             class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 lg:hidden">
-                            <span class="sr-only">Open main menu</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
-                            </svg>
+                            <x-icons.menu-line :width="38" :height="38" />
                         </button>
                     </div>
                 </div>
@@ -78,11 +74,7 @@
                     <div class="flex items-center justify-between">
                         <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700"
                             @click.prevent="open = false">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
-                            </svg>
+                            <x-icons.close-line :width="38" :height="38" />
                         </button>
                     </div>
                     <div class="mt-6 flow-root">
