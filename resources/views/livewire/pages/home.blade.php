@@ -1,6 +1,6 @@
 <x-utilities.main>
     {{-- Hero --}}
-    <x-utilities.section hasSpace={{ false }}>
+    <x-utilities.section class="overflow-y-hidden" hasSpace={{ false }}>
         <div class="max-h-[800px] h-full">
             <img src="{{ asset('/assets/hero-homepage-prodotti.jpg') }}" class="h-auto object-cover">
         </div>
@@ -13,7 +13,7 @@
     <x-utilities.section hasSpace={{ false }}>
         <div class="bg-consider text-center flex flex-col items-center gap-4 py-9">
             <div class="mb-6">
-                <p class="~sm/lg:~text-1xl/3xl">La nostra <span class="font-serif italic font-bold">filosofia</span></p>
+                <p class="~sm/lg:~text-1xl/3xl">La nostra <span class="font-serif italic font-normal">filosofia</span></p>
             </div>
             <x-utilities.button href="/about">Scopri di più</x-utilities.button>
         </div>
@@ -46,7 +46,7 @@
                     <div class="py-5 px-4 grid place-items-center">
                         <div class="text-center space-y-4">
                             <p class="~sm/lg:~text-xl/2xl leading-none">
-                                <span class="font-serif italic font-bold">Banner</span> informazioni
+                                <span class="font-serif italic font-normal">Banner</span> informazioni
                             </p>
 
                             <div class="max-w-[230px] mx-auto">
