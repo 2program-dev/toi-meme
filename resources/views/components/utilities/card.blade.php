@@ -9,14 +9,14 @@
 
 <a href={{ $href }} class="grid grid-rows-subgrid row-span-2 gap-y-0 @container">
     <div @class([
-        'grid place-items-center aspect-square @[550px]:aspect-video',
+        'grid place-items-center aspect-square size-full @[550px]:aspect-video',
         'bg-brown' => $color === 'brown',
         'bg-consider' => $color === 'consider',
         'bg-reinvigorated' => $color === 'reinvigorated',
         'bg-radiant' => $color === 'radiant',
         'bg-energetic' => $color === 'energetic',
     ])>
-        <img src="{{ asset($image) }}" class="size-full object-contain">
+        <img src="{{ asset($image) }}" class="size-full object-contain aspect-square @[550px]:aspect-video">
     </div>
     <div class="py-5 px-2 border-y text-center">
         <p class="font-bold">{{ $title }}</p>
