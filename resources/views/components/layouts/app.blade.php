@@ -49,10 +49,10 @@
 
                 <div class="flex flex-1 justify-end">
                     <div class="flex items-center justify-end gap-4 lg:gap-8">
-                        <a href="#">
+                        <a href="#" class="max-sm:hidden">
                             <x-icons.user-line :width="38" :height="38" />
                         </a>
-                        <a href="#">
+                        <a href="#" class="max-sm:hidden">
                             <x-icons.cart-line :width="38" :height="38" />
                         </a>
 
@@ -82,15 +82,27 @@
                             <div class="space-y-2 py-6">
                                 <ul class="flex items-center flex-col justify-center gap-16">
                                     <li class="font-light">
-                                        <a href="">Prodotti</a>
+                                        <a class="underline-offset-8" href="{{ route('product') }}"
+                                            :class="{ 'underline': window.location.pathname == '/product' }">Prodotti</a>
                                     </li>
                                     <li class="font-light">
-                                        <a href="">Chi siamo</a>
+                                        <a class="underline-offset-8" href="{{ route('about') }}"
+                                            :class="{ 'underline': window.location.pathname == '/about' }">Chi siamo</a>
                                     </li>
                                     <li class="font-light">
-                                        <a href="">Contatti</a>
+                                        <a class="underline-offset-8" href="{{ route('contacts') }}"
+                                            :class="{ 'underline': window.location.pathname == '/contacts' }">Contatti</a>
                                     </li>
                                 </ul>
+                            </div>
+
+                            <div class="sm:hidden flex items-center justify-center gap-8 pt-8">
+                                <a href="#">
+                                    <x-icons.user-line :width="38" :height="38" />
+                                </a>
+                                <a href="#">
+                                    <x-icons.cart-line :width="38" :height="38" />
+                                </a>
                             </div>
                         </div>
                     </div>
