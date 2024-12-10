@@ -41,6 +41,8 @@ export default {
             'orange-500': '#fe3511',
             consider: '#E3BCA0',
             cream: '#F2E9E3',
+            "cream-50": '#f9f5f3',
+            "cream-200": '#e3d0c5',
             brown: '#3A1400',
             reinvigorated: '#FEEDDD',
             radiant:'#C37C57',
