@@ -52,8 +52,8 @@
 
                     {{-- Descrizione --}}
                     <div class="mt-8">
-                        <div x-data="{ tab: 'tab1' }">
-                            <div class="flex flex-wrap items-center flex-wrap gap-x-8 gap-y-4">
+                        <div x-data="{ tab: 'tab1', expanded: false }">
+                            <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
                                 <button :class="{ 'underline underline-offset-8 !decoration-black': tab == 'tab1' }"
                                     @click.prevent="tab = 'tab1'"
                                     class="uppercase decoration-transparent transition-colors duration-500">Descrizione</button>
@@ -65,27 +65,38 @@
 
                             <div class="mt-4 grid grid-cols-1 *:col-span-full *:row-span-full">
                                 <div x-show="tab == 'tab1'" x-transition.opacity x-transition.duration.300ms>
-                                    <p>
-                                        Tab 1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                    <p x-show="expanded" x-collapse.min.156px>
+                                        Tab 1 Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        industry.
                                         Lorem Ipsum has been the industry's, Lorem Ipsum is simply dummy text of the
                                         printing and typesetting industry. Lorem Ipsum has been the industry's,
                                         Lorem Ipsum is simply dummy text of the printing and typesetting
-                                        industry....
+                                        industry Lorem Ipsum has been the industry's, Lorem Ipsum is simply dummy text
+                                        of the
+                                        printing and typesetting industry. Lorem Ipsum has been the industry's,
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        industry
                                     </p>
                                 </div>
                                 <div x-show="tab == 'tab2'" x-transition.opacity x-transition.duration.300ms>
-                                    <p>
-                                        Tab 2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                        Lorem
-                                        Ipsum has been the industry's, Lorem Ipsum is simply dummy text of the printing
-                                        and typesetting industry. Lorem Ipsum has been the industry's, Lorem Ipsum is
-                                        simply dummy text of the printing and typesetting industry....
+                                    <p x-show="expanded" x-collapse.min.156px>
+                                        Tab 2 Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        industry.
+                                        Lorem Ipsum has been the industry's, Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem Ipsum has been the industry's,
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        industry Lorem Ipsum has been the industry's, Lorem Ipsum is simply dummy text
+                                        of the
+                                        printing and typesetting industry. Lorem Ipsum has been the industry's,
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        industry
                                     </p>
                                 </div>
                             </div>
 
                             <div class="mt-6">
-                                <button class="uppercase text-base">Read more</button>
+                                <button @click="expanded=!expanded" x-text="expanded ? 'Close' : 'Read more'"
+                                    class="uppercase text-base"></button>
                             </div>
                         </div>
                     </div>
@@ -105,7 +116,7 @@
                     <div class="md:max-w-[446px]">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                             been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book. </p>
+                            galley of type and scrambled it to make a type specimen book.</p>
                     </div>
                 </div>
                 <div class="basis-1/2">
