@@ -1,8 +1,9 @@
 <x-utilities.main>
     {{-- Hero --}}
     <x-utilities.section class="overflow-y-hidden" hasSpace={{ false }}>
-        <div class="max-h-[800px] h-full">
-            <img src="{{ asset('/assets/hero-homepage-prodotti.jpg') }}" class="h-auto object-cover">
+        <div class="min-h-[75vh] overflow-hidden relative">
+            <img src="{{ asset('/assets/hero-homepage-prodotti.jpg') }}"
+                class="size-full object-top object-cover absolute inset-0">
         </div>
     </x-utilities.section>
 
