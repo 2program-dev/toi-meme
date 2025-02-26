@@ -1,9 +1,10 @@
 <x-utilities.main class="text-black grid place-items-center">
     <x-utilities.section class="w-full">
         <x-utilities.container>
-            <h1 class="~sm/lg:~text-[2.5rem]/4xl text-center leading-tight">
+            <h1 class="font-serif font-normal italic ~sm/lg:~text-[2.5rem]/4xl text-center leading-tight">
                 Accedi
             </h1>
+
         </x-utilities.container>
 
         <div class="mt-8 lg:mt-12">
@@ -20,6 +21,11 @@
                     </div>
 
                     <x-utilities.button tag="button">Continua</x-utilities.button>
+
+                    <div class="text-center mt-8">
+                        Non sei ancora registrato? Vai alla pagina di <a href="/registration"
+                            class="text-orange hover:underline"><b>registrazione</b></a>
+                    </div>
                 </form>
             </x-utilities.container>
         </div>
