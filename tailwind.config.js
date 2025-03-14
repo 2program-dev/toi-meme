@@ -1,8 +1,9 @@
-import fluid, { extract, screens } from 'fluid-tailwind';
-import defaultTheme from 'tailwindcss/defaultTheme';
+const fluidPlugin = require('fluid-tailwind');
+const { extract, screens } = fluidPlugin;
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
     content: {
         files: [
             './resources/**/*.blade.php',
@@ -53,6 +54,6 @@ export default {
             transparent: 'transparent'
         },
     },
-    plugins: [fluid({checkSC144: false}), require('@tailwindcss/container-queries')],
+    plugins: [fluidPlugin({checkSC144: false}), require('@tailwindcss/container-queries')],
 };
 
