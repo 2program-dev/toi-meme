@@ -29,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->brandName(env('APP_NAME'))
             ->login()
-            ->spa(true)
+            ->spa(false)
 
             ->colors([
                 'primary' => Color::hex('#FF5C36'),
@@ -38,7 +38,10 @@ class AdminPanelProvider extends PanelProvider
             ->defaultThemeMode(ThemeMode::Dark)
             ->maxContentWidth('full')
             ->topNavigation()
+            ->brandLogo(asset('assets/toi-meme-logo-orange.svg'))
+            ->darkModeBrandLogo(asset('assets/toi-meme-logo-orange.svg'))
 
+            ->databaseNotifications()
 
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
