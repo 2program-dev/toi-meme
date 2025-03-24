@@ -24,6 +24,7 @@ class OrderRowFactory extends Factory
         $total = $quantity * $price;
 
         return [
+            'product_title' => $product->title,
             'product_id' => $product->id,
             'quantity' => $quantity,
             'price' => $price,
