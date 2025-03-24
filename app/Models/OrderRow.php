@@ -9,6 +9,8 @@ class OrderRow extends Model
 {
     use HasFactory;
 
+    protected $fillable = [];
+
     public function order()
     {
         return $this->belongsTo(Order::class);
