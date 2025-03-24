@@ -20,6 +20,28 @@ return new class extends Migration
             $table->decimal('subtotal', 10, 2)->default(0);
             $table->decimal('total', 10, 2)->default(0);
 
+            $table->string('customer_first_name');
+            $table->string('customer_last_name');
+
+            $table->string('customer_phone')->nullable();
+
+            $table->string('customer_company')->nullable();
+            $table->string('customer_vat', 13)->nullable();
+            $table->string('customer_fiscal_code', 16)->nullable();
+            $table->string('customer_sdi', 7)->nullable();
+
+            $table->string('customer_billing_address');
+            $table->string('customer_billing_city');
+            $table->string('customer_billing_state');
+            $table->string('customer_billing_zip');
+            $table->string('customer_billing_country');
+
+            $table->string('customer_shipping_address')->nullable();
+            $table->string('customer_shipping_city')->nullable();
+            $table->string('customer_shipping_state')->nullable();
+            $table->string('customer_shipping_zip')->nullable();
+            $table->string('customer_shipping_country')->nullable();
+
 
             $table->timestamps();
         });
