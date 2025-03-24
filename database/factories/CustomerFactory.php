@@ -17,14 +17,17 @@ class CustomerFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::factory()->createOne(['role' => 'customer']);
+        $user->markEmailAsVerified();
         return [
-            'user_id' => User::factory()->count(1)->create()->first()->id,
+            'user_id' => $user->id,
 
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
 
             'phone' => $this->faker->phoneNumber(),
 
+            'company' => $this->faker->company(),
             'vat' => $this->faker->vat(),
             'fiscal_code' => $this->faker->taxId(),
             'sdi' => $this->faker->regexify('[A-Z0-9]{7}'),

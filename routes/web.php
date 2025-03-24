@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RoleMiddleware;
 use App\Livewire\Pages\About;
 use App\Livewire\Pages\Contacts;
 use App\Livewire\Pages\Home;
@@ -19,6 +20,9 @@ Route::get('/about', About::class)->name('about');
 Route::get('/contacts', ContactsV2::class)->name('contacts');
 Route::get('/login', Login::class)->name('login');
 Route::get('/registration', Registration::class)->name('registration');
-Route::get('/cart', Cart::class)->name('cart');
-Route::get('/order-list', OrderList::class)->name('order-list');
-Route::get('/edit-profile', EditProfile::class)->name('edit-profile');
+
+Route::middleware(['verified', 'role:customer'])->group(function () {
+    Route::get('/cart', Cart::class)->name('cart');
+    Route::get('/order-list', OrderList::class)->name('order-list');
+    Route::get('/edit-profile', EditProfile::class)->name('edit-profile');
+});

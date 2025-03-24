@@ -8,6 +8,7 @@ use App\Models\Product;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,8 +20,9 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => '2Program Srl',
             'email' => 'info@2program.it',
-            'password' => bcrypt('admin'),
-        ]);
+            'password' => Hash::make('admin'),
+            'role' => 'admin'
+        ])->markEmailAsVerified();
 
         Product::factory()->count(5)->create();
 
