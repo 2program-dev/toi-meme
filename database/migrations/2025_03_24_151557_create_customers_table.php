@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->unique()->constrained('users')->onDelete('restrict');
+            $table->foreignId('user_id')->nullable()->unique()->constrained('users')->onDelete('set null');
 
             $table->string('first_name');
             $table->string('last_name');
@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('shipping_zip')->nullable();
             $table->string('shipping_country')->nullable();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
