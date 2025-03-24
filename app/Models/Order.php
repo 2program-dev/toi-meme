@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable = ['customer_id', 'order_number'];
+    protected $fillable = [];
 
     public function orderRows()
     {
