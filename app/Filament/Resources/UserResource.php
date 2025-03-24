@@ -42,7 +42,13 @@ class UserResource extends Resource
                             ->label('Email')
                             ->email()
                             ->required()
-                            ->maxLength(255),
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(255)
+                            ->validationMessages(
+                                [
+                                    'unique' => 'L\'email inserita è già in uso.',
+                                ]
+                            ),
                         Forms\Components\Select::make('role')
                             ->label('Ruolo')
                             ->placeholder('Seleziona un ruolo')
@@ -70,7 +76,10 @@ class UserResource extends Resource
                             ->maxLength(255)
                             ->minLength(6)
                             ->revealable()
-                            ->same('password'),
+                            ->same('password')
+                            ->validationMessages([
+                                'same' => 'Le password non corrispondono.',
+                            ]),
                     ])
                     ->description("Da compilare solo nel caso in cui si voglia modificare la password dell'utente."),
                 ])->columns(1)
