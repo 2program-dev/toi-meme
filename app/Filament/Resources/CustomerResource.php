@@ -107,6 +107,20 @@ class CustomerResource extends Resource
                                     ->maxLength(255),
                             ]),
                     Section::make('Indirizzo di spedizione')
+                            ->headerActions([
+                                Forms\Components\Actions\Action::make('copy_billing_address')
+                                    ->label('Copia indirizzo di fatturazione')
+                                    ->color('gray')
+                                    ->size('sm')
+                                    ->icon('heroicon-o-clipboard-document-list')
+                                    ->action(function (Forms\Set $set, Forms\Get $get) {
+                                        $set('shipping_address', $get('billing_address'));
+                                        $set('shipping_city', $get('billing_city'));
+                                        $set('shipping_state', $get('billing_state'));
+                                        $set('shipping_zip', $get('billing_zip'));
+                                        $set('shipping_country', $get('billing_country'));
+                                    }),
+                            ])
                             ->schema([
                                 TextInput::make('shipping_address')
                                     ->label('Indirizzo')
