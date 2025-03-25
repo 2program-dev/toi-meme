@@ -6,9 +6,14 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,51 +32,104 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('first_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('last_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->tel()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('company')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('vat')
-                    ->maxLength(13),
-                Forms\Components\TextInput::make('fiscal_code')
-                    ->maxLength(16),
-                Forms\Components\TextInput::make('sdi')
-                    ->maxLength(7),
-                Forms\Components\TextInput::make('billing_address')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('billing_city')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('billing_state')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('billing_zip')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('billing_country')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('shipping_address')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('shipping_city')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('shipping_state')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('shipping_zip')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('shipping_country')
-                    ->maxLength(255),
+                Forms\Components\Split::make([
+                    Section::make('')
+                        ->schema([
+                            Forms\Components\Select::make('user_id')
+                                ->label('Utente')
+                                ->relationship('user', 'email')
+                                ->searchable([
+                                    'email',
+                                    'name'
+                                ])
+                                ->nullable()
+                                ->unique(ignoreRecord: true)
+                                ->validationMessages(
+                                    [
+                                        'unique' => 'L\'utente è già collegato ad un altro cliente',
+                                    ]
+                                ),
+                            TextInput::make('first_name')
+                                ->label('Nome')
+                                ->required()
+                                ->maxLength(255),
+                            TextInput::make('last_name')
+                                ->label('Cognome')
+                                ->required()
+                                ->maxLength(255),
+                            TextInput::make('phone')
+                                ->label('Telefono')
+                                ->nullable()
+                                ->maxLength(255),
+                        ]),
+                    Section::make('')
+                        ->schema([
+                            TextInput::make('company')
+                                ->label('Azienda')
+                                ->nullable()
+                                ->maxLength(255),
+                            TextInput::make('vat')
+                                ->label('Partita IVA')
+                                ->nullable()
+                                ->maxLength(13),
+                            TextInput::make('fiscal_code')
+                                ->label('Codice Fiscale')
+                                ->nullable()
+                                ->maxLength(16),
+                            TextInput::make('sdi')
+                                ->label('Codice SDI')
+                                ->nullable()
+                                ->maxLength(7),
+                        ]),
+                ])->columnSpan(2),
+                Forms\Components\Split::make([
+                        Section::make('Indirizzo di fatturazione')
+                            ->schema([
+                                TextInput::make('billing_address')
+                                    ->label('Indirizzo')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('billing_city')
+                                    ->label('Città')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('billing_state')
+                                    ->label('Provincia')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('billing_zip')
+                                    ->label('CAP')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('billing_country')
+                                    ->label('Nazione')
+                                    ->required()
+                                    ->maxLength(255),
+                            ]),
+                    Section::make('Indirizzo di spedizione')
+                            ->schema([
+                                TextInput::make('shipping_address')
+                                    ->label('Indirizzo')
+                                    ->nullable()
+                                    ->maxLength(255),
+                                TextInput::make('shipping_city')
+                                    ->label('Città')
+                                    ->nullable()
+                                    ->maxLength(255),
+                                TextInput::make('shipping_state')
+                                    ->label('Provincia')
+                                    ->nullable()
+                                    ->maxLength(255),
+                                TextInput::make('shipping_zip')
+                                    ->label('CAP')
+                                    ->nullable()
+                                    ->maxLength(255),
+                                TextInput::make('shipping_country')
+                                    ->label('Nazione')
+                                    ->nullable()
+                                    ->maxLength(255),
+                            ]),
+                    ])->columnSpan(2)
             ]);
     }
 
@@ -79,66 +137,133 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('first_name')
+                TextColumn::make('first_name')
+                    ->label('Nome')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('last_name')
+                TextColumn::make('last_name')
+                    ->label('Cognome')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+                TextColumn::make('user.email')
+                    ->label('Utente')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('company')
+                TextColumn::make('phone')
+                    ->label('Telefono')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('vat')
+                TextColumn::make('company')
+                    ->label('Azienda')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('fiscal_code')
+                TextColumn::make('vat')
+                    ->label('Partita IVA')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('sdi')
+                TextColumn::make('fiscal_code')
+                    ->label('Codice Fiscale')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('billing_address')
+                TextColumn::make('sdi')
+                    ->label('Codice SDI')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('billing_city')
+                TextColumn::make('billing_address')
+                    ->label('Indirizzo di fatturazione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('billing_state')
+                TextColumn::make('billing_city')
+                    ->label('Città di fatturazione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('billing_zip')
+                TextColumn::make('billing_state')
+                    ->label('Provincia di fatturazione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('billing_country')
+                TextColumn::make('billing_zip')
+                    ->label('CAP di fatturazione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('shipping_address')
+                TextColumn::make('billing_country')
+                    ->label('Nazione di fatturazione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('shipping_city')
+                TextColumn::make('shipping_address')
+                    ->label('Indirizzo di spedizione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('shipping_state')
+                TextColumn::make('shipping_city')
+                    ->label('Città di spedizione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('shipping_zip')
+                TextColumn::make('shipping_state')
+                    ->label('Provincia di spedizione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('shipping_country')
+                TextColumn::make('shipping_zip')
+                    ->label('CAP di spedizione')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                TextColumn::make('shipping_country')
+                    ->label('Nazione di spedizione')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                TextColumn::make('deleted_at')
+                    ->label('Data eliminazione')
+                    ->dateTime("d F Y, H:i:s")
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                TextColumn::make('created_at')
+                    ->label('Data creazione')
+                    ->dateTime("d F Y, H:i:s")
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                TextColumn::make('updated_at')
+                    ->label('Ultima modifica')
+                    ->dateTime("d F Y, H:i:s")
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
+                Tables\Filters\TrashedFilter::make()
+                ->label('Cestinati'),
+            ], layout: Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make()
+                        ->action(function ($records, Tables\Actions\ForceDeleteBulkAction $action) {
+                            $deleted = 0;
+                            $notDeleted = 0;
+
+                            foreach ($records as $record) {
+                                try {
+                                    $record->forceDelete();
+                                    $deleted++;
+                                } catch (\Exception $e) {
+                                    $notDeleted++;
+                                }
+                            }
+
+                            if ($deleted > 0) {
+                                Notification::make()
+                                    ->success()
+                                    ->title('Clienti eliminati')
+                                    ->body("Sono stati eliminati {$deleted} clienti.")
+                                    ->send();
+                            }
+
+                            if ($notDeleted > 0) {
+                                Notification::make()
+                                    ->danger()
+                                    ->title('Errore durante l\'eliminazione')
+                                    ->body("Impossibile eliminare {$notDeleted} clienti.")
+                                    ->send();
+                            }
+
+                            $action->refresh();
+                        }),
                     Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);

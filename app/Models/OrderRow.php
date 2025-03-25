@@ -9,7 +9,7 @@ class OrderRow extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = [];
 
     public function order()
     {

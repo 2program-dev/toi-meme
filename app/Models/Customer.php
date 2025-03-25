@@ -10,10 +10,14 @@ class Customer extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = [];
+    protected $guarded = [];
 
     public function orders()
     {
         return $this->hasMany(Order::class, 'customer_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

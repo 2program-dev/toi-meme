@@ -8,6 +8,7 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -49,7 +50,7 @@ class UserResource extends Resource
                                     'unique' => 'L\'email inserita è già in uso.',
                                 ]
                             ),
-                        Forms\Components\Select::make('role')
+                        Select::make('role')
                             ->label('Ruolo')
                             ->placeholder('Seleziona un ruolo')
                             ->options([
@@ -123,7 +124,6 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->failureNotificationTitle('Eliminazione fallita')
                     ->action(function ($record, Tables\Actions\DeleteAction $action) {
                         try {
                             $record->delete();
@@ -145,7 +145,38 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                    ->action(function ($records, Tables\Actions\DeleteBulkAction $action) {
+                            $deleted = 0;
+                            $notDeleted = 0;
+
+                            foreach ($records as $record) {
+                                try {
+                                    $record->delete();
+                                    $deleted++;
+                                } catch (\Exception $e) {
+                                    $notDeleted++;
+                                }
+                            }
+
+                            if ($deleted > 0) {
+                                Notification::make()
+                                    ->success()
+                                    ->title('Utenti eliminati')
+                                    ->body("Sono stati eliminati {$deleted} utenti.")
+                                    ->send();
+                            }
+
+                            if ($notDeleted > 0) {
+                                Notification::make()
+                                    ->danger()
+                                    ->title('Errore durante l\'eliminazione')
+                                    ->body("Impossibile eliminare {$notDeleted} utenti.")
+                                    ->send();
+                            }
+
+                            $action->refresh();
+                        }),
                 ]),
             ])
             ->defaultPaginationPageOption(10);
