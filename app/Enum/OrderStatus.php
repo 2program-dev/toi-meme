@@ -2,16 +2,16 @@
 
 namespace App\Enum;
 
-enum UserRole: string
+enum OrderStatus: string
 {
-    case ADMIN_ROLE = 'admin';
-    case CUSTOMER_ROLE = 'customer';
+    case ORDER_RECEIVED = 'received';
+    case ORDER_COMPLETED = 'completed';
 
     public function label(): string
     {
         return match($this) {
-            self::ADMIN_ROLE => 'Amministratore',
-            self::CUSTOMER_ROLE => 'Cliente',
+            self::ORDER_RECEIVED => 'Ricevuto',
+            self::ORDER_COMPLETED => 'Completato',
         };
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('customers')->onDelete('restrict');
 
             $table->string('order_number');
+            $table->string('status')->default(OrderStatus::ORDER_RECEIVED);
 
             $table->decimal('subtotal', 10, 2)->default(0);
             $table->decimal('total', 10, 2)->default(0);
