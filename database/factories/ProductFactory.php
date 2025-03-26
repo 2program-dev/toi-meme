@@ -19,14 +19,17 @@ class ProductFactory extends Factory
     public function definition(): array
     {
 
+        $productName = $this->faker->colorName() . " " . $this->faker->word();
+        $focusTitle = $this->faker->sentence();
+
         return [
-            'title' => $this->faker->colorName() . " " . $this->faker->word(),
+            'title' => $productName,
             'slug' => $this->faker->slug(2),
 
             'category' => $this->faker->word(),
             'sku' => $this->faker->unique()->numerify('SKU-####'),
 
-            'image' => $this->faker->imageUrl(),
+            'image' => 'https://placehold.co/1920x800/FF5C36/FFFFFF?text=Toi-meme\n' . $productName,
 
             'price' => $this->faker->randomFloat(2, 20, 300),
             'min_qty' => $this->faker->randomElement([100, 200, 300, 400, 500]),
@@ -35,9 +38,9 @@ class ProductFactory extends Factory
             'description' => $this->faker->text,
             'ingredients' => $this->faker->text,
 
-            'focus_title' => $this->faker->sentence(),
+            'focus_title' => $focusTitle,
             'focus_description' => $this->faker->text,
-            'focus_image' => $this->faker->imageUrl(),
+            'focus_image' => 'https://placehold.co/1920x800/FF5C36/FFFFFF?text=Focus\n' . $focusTitle,
         ];
     }
 
