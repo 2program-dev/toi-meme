@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('set null');
 
             $table->string('product_title');
-            $table->integer('quantity');
+            $table->unsignedInteger('quantity');
             $table->decimal('price', 10, 2);
             $table->decimal('total', 10, 2);
 
