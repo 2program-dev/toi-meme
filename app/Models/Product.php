@@ -11,7 +11,9 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
-
+    protected $casts = [
+        'related_products' => 'array',
+    ];
     public function variants()
     {
         return $this->hasMany(ProductVariant::class);

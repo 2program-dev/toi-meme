@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'category' => $this->faker->word(),
             'sku' => $this->faker->unique()->numerify('SKU-####'),
 
-            'image' => 'https://placehold.co/1920x800/FF5C36/FFFFFF?text=Toi-meme\n' . $productName,
+            'image' => 'https://placehold.co/1920x800/FF5C36/FFFFFF?text=Toi-meme\nProduct',
 
             'price' => $this->faker->randomFloat(2, 20, 300),
             'min_qty' => $this->faker->randomElement([100, 200, 300, 400, 500]),
@@ -40,7 +40,7 @@ class ProductFactory extends Factory
 
             'focus_title' => $focusTitle,
             'focus_description' => $this->faker->text,
-            'focus_image' => 'https://placehold.co/1920x800/FF5C36/FFFFFF?text=Focus\n' . $focusTitle,
+            'focus_image' => 'https://placehold.co/2400x1984/FF5C36/FFFFFF?text=Focus',
         ];
     }
 

@@ -33,6 +33,7 @@ class OrderResource extends Resource
                 Forms\Components\TextInput::make('order_number')
                     ->required()
                     ->maxLength(255),
+                // TODO ORDER STATUS
                 Forms\Components\TextInput::make('subtotal')
                     ->required()
                     ->numeric()
@@ -95,6 +96,7 @@ class OrderResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('order_number')
                     ->searchable(),
+                // TODO ORDER STATUS
                 Tables\Columns\TextColumn::make('subtotal')
                     ->numeric()
                     ->sortable(),

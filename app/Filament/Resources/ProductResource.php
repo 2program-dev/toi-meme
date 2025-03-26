@@ -2,16 +2,22 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\CustomFields\BasicEditorField;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class ProductResource extends Resource
 {
@@ -27,35 +33,121 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('category')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('sku')
-                    ->label('SKU')
-                    ->maxLength(255),
-                Forms\Components\FileUpload::make('image')
-                    ->image(),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->default(0.00)
-                    ->prefix('$'),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('ingredients')
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('focus_title')
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('focus_description')
-                    ->columnSpanFull(),
-                Forms\Components\FileUpload::make('focus_image')
-                    ->image(),
-                Forms\Components\TextInput::make('related_products'),
+                Section::make('Scheda prodotto')
+                    ->schema([
+                        TextInput::make('title')
+                            ->label('Nome prodotto')
+                            ->required()
+                            ->maxLength(255)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (Forms\Set $set, $state, Forms\Get $get) {
+                                if (!$get('slug')) {
+                                    $set('slug', Str::slug($state));
+                                }
+                            }),
+                        TextInput::make('slug')
+                            ->helperText('sarà la parte finale dell\'URL del prodotto')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('sku')
+                            ->label('SKU')
+                            ->maxLength(255),
+                        TextInput::make('category')
+                            ->label('Categoria')
+                            ->helperText('apparirà sotto il nome del prodotto')
+                            ->maxLength(255),
+                        TextInput::make('price')
+                            ->label('Prezzo unitario')
+                            ->required()
+                            ->numeric()
+                            ->default(0.00)
+                            ->prefix('€'),
+                        TextInput::make('min_qty')
+                            ->label('Quantità minima acquistabile')
+                            ->numeric()
+                            ->integer()
+                            ->minValue(1)
+                            ->step(1)
+                            ->default(1),
+                        TextInput::make('step_qty')
+                            ->label('Step quantità di acquisto')
+                            ->numeric()
+                            ->integer()
+                            ->minValue(1)
+                            ->step(1)
+                            ->default(1),
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Immagine del prodotto')
+                            ->directory('products')
+                            ->image()
+                            ->multiple(false)
+                            ->preserveFilenames()
+                            ->imagePreviewHeight(120)
+                            ->maxSize(1024) // KB
+                            ->required()
+                            ->columnSpan(2),
+                        Forms\Components\Select::make('related_products')
+                            ->label('Prodotti correlati')
+                            ->multiple()
+                            ->maxItems(2)
+                            ->options(fn () => Product::all()->pluck('title', 'id')->toArray())
+                            ->helperText('massimo 2 prodotti')
+                            ->columnSpan(2),
+                    ])
+                    ->columns(4),
+                Section::make('Varianti prodotto')
+                    ->collapsible()
+                    ->schema([
+                        // create a form fields for the product variants
+                        Forms\Components\Repeater::make('variants')
+                            ->relationship()
+                            ->reorderable()
+                            ->label('')
+                            ->maxItems(4)
+                            ->schema([
+                                TextInput::make('title')
+                                    ->label('Titolo variante')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('sku')
+                                    ->label('SKU variante')
+                                    ->maxLength(255),
+                                Forms\Components\FileUpload::make('icon')
+                                    ->label('Icona')
+                                    ->directory('variant-icons')
+                                    ->image()
+                                    ->preserveFilenames()
+                                    ->imagePreviewHeight(60)
+                                    ->maxSize(512),
+                            ])
+                            ->addActionLabel("Aggiungi variante")
+                            ->collapsible()
+                            ->columns(3),
+                    ]),
+                Forms\Components\Split::make([
+                    Section::make('Dettagli prodotto')
+                        ->schema([
+                            BasicEditorField::richEditorWithBasicToolbar('description')
+                                ->label('Descrizione'),
+                            BasicEditorField::richEditorWithBasicToolbar('ingredients')
+                                ->label('Ingredienti'),
+                        ]),
+                    Section::make('Focus')
+                        ->schema([
+                            TextInput::make('focus_title')
+                                ->label('Titolo sezione focus')
+                                ->maxLength(255),
+                            BasicEditorField::richEditorWithBasicToolbar('focus_description')
+                                ->label('Contenuto del focus'),
+                            Forms\Components\FileUpload::make('focus_image')
+                                ->directory('focus')
+                                ->image()
+                                ->multiple(false)
+                                ->preserveFilenames()
+                                ->imagePreviewHeight(120)
+                                ->maxSize(1024) // KB,
+                        ])
+                ])->columnSpanFull()
             ]);
     }
 
@@ -63,40 +155,61 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('category')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sku')
-                    ->label('SKU')
-                    ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('focus_title')
-                    ->searchable(),
-                Tables\Columns\ImageColumn::make('focus_image'),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                TextColumn::make('id')
+                    ->label('ID')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Thumbnail')
+                    ->width(80)->height(60),
+                TextColumn::make('title')
+                    ->label('Nome prodotto')
+                    ->description(fn(Product $product) => $product->sku)
+                    ->searchable(['title', 'sku'])
+                    ->weight('font-bold'),
+                TextColumn::make('category')
+                    ->label('Categoria')
+                    ->searchable()
+                    ->grow(false),
+                TextColumn::make('price')
+                    ->label('Prezzo')
+                    ->numeric(decimalPlaces: 2)
+                    ->money('EUR')
+                    ->sortable()
+                    ->grow(false),
+                TextColumn::make('min_qty')
+                    ->label('Min. qty')
+                    ->numeric()
+                    ->sortable()
+                    ->grow(false),
+                TextColumn::make('step_qty')
+                    ->label('Step qty')
+                    ->numeric()
+                    ->sortable()
+                    ->grow(false),
+                TextColumn::make('deleted_at')
+                    ->label('Data eliminazione')
+                    ->dateTime("d F Y, H:i:s")
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                TextColumn::make('created_at')
+                    ->label('Data creazione')
+                    ->dateTime("d F Y, H:i:s")
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                TextColumn::make('updated_at')
+                    ->label('Ultima modifica')
+                    ->dateTime("d F Y, H:i:s")
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
+                Tables\Filters\TrashedFilter::make()
+                    ->label('Cestinati'),
+            ], layout: Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

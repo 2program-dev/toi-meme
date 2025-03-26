@@ -151,6 +151,9 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->label('ID')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('first_name')
                     ->label('Nome')
                     ->searchable(),
