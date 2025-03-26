@@ -45,10 +45,6 @@ class ProductResource extends Resource
                     ->numeric()
                     ->default(0.00)
                     ->prefix('$'),
-                Forms\Components\TextInput::make('sale_price')
-                    ->numeric(),
-                Forms\Components\Toggle::make('on_sale')
-                    ->required(),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('ingredients')
@@ -80,11 +76,6 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('sale_price')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('on_sale')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('focus_title')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('focus_image'),

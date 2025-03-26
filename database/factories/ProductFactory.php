@@ -28,8 +28,6 @@ class ProductFactory extends Factory
             'image' => $this->faker->imageUrl(),
 
             'price' => $this->faker->randomFloat(2, 20, 300),
-            'sale_price' => $this->faker->randomFloat(2, 10, 200),
-            'on_sale' => $this->faker->boolean(),
 
             'description' => $this->faker->text,
             'ingredients' => $this->faker->text,

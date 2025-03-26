@@ -23,8 +23,6 @@ return new class extends Migration
             $table->string('image')->nullable();
 
             $table->decimal('price', 10, 2)->default(0);
-            $table->decimal('sale_price', 10, 2)->nullable();
-            $table->boolean('on_sale')->default(false);
 
             $table->text('description')->nullable();
             $table->text('ingredients')->nullable();
