@@ -55,10 +55,7 @@ class UserResource extends Resource
                         Select::make('role')
                             ->label('Ruolo')
                             ->placeholder('Seleziona un ruolo')
-                            ->options([
-                                'admin' => 'Amministratore',
-                                'customer' => 'Cliente',
-                            ])
+                            ->options(UserRole::options())
                             ->required(),
                     ]),
                     Section::make([
@@ -119,10 +116,7 @@ class UserResource extends Resource
                 SelectFilter::make('role')
                     ->label('Ruolo')
                     ->placeholder('Tutti i ruoli')
-                    ->options([
-                        'admin' => 'Amministratore',
-                        'customer' => 'Cliente',
-                    ])
+                    ->options(UserRole::options())
             ], layout: Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([
                 Tables\Actions\EditAction::make(),
