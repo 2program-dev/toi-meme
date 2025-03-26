@@ -31,6 +31,8 @@ class UserResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $operation = $form->getOperation();
+
         return $form
             ->schema([
                 Split::make([
@@ -61,7 +63,8 @@ class UserResource extends Resource
                     ]),
                     Section::make([
                         TextInput::make('password')
-                            ->label('Password (min. 6 caratteri)')
+                            ->label('Password')
+                            ->helperText("minimo 6 caratteri")
                             ->required(fn (string $operation): bool => $operation === 'create')
                             ->nullable(fn (string $operation): bool => $operation === 'edit')
                             ->password()
@@ -82,7 +85,7 @@ class UserResource extends Resource
                                 'same' => 'Le password non corrispondono.',
                             ]),
                     ])
-                    ->description("Da compilare solo nel caso in cui si voglia modificare la password dell'utente."),
+                    ->description($operation === 'create' ? "Crea una password" : "Da compilare solo nel caso in cui si voglia modificare la password dell'utente."),
                 ])->columns(1)
             ])
             ->columns(1);
