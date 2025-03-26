@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,6 +29,8 @@ class ProductFactory extends Factory
             'image' => $this->faker->imageUrl(),
 
             'price' => $this->faker->randomFloat(2, 20, 300),
+            'min_qty' => $this->faker->randomElement([100, 200, 300, 400, 500]),
+            'step_qty' => $this->faker->randomElement([100, 200, 300, 400, 500]),
 
             'description' => $this->faker->text,
             'ingredients' => $this->faker->text,
@@ -36,5 +39,19 @@ class ProductFactory extends Factory
             'focus_description' => $this->faker->text,
             'focus_image' => $this->faker->imageUrl(),
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Product $product) {
+            $productVariants = ProductVariant::factory()->count(rand(1, 2))->make();
+
+            foreach ($productVariants as $productVariant) {
+                $productVariant->product_id = $product->id;
+                $productVariant->save();
+            }
+
+            $product->save();
+        });
     }
 }
