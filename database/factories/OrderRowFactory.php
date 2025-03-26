@@ -27,6 +27,7 @@ class OrderRowFactory extends Factory
             'product_title' => $product->title,
             'product_id' => $product->id,
             'quantity' => $quantity,
+            'customization' => $this->faker->boolean(),
             'price' => $price,
             'total' => $total,
         ];
