@@ -14,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('restrict');
+            $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('set null');
 
-            $table->string('order_number');
+            $table->string('order_number')->autoincrement()->startingValue(1);
             $table->string('status')->default(OrderStatus::ORDER_RECEIVED);
 
             $table->decimal('subtotal', 10, 2)->default(0);

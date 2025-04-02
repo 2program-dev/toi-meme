@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enum\OrderStatus;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderRow;
@@ -20,9 +21,11 @@ class OrderFactory extends Factory
 
         return [
             'customer_id' => $customer?->id,
-            'order_number' => $this->faker->unique()->randomNumber(),
+            'order_number' => $this->faker->unique()->randomNumber(8, true),
             'subtotal' => 0,
             'total' => 0,
+
+            'status' => $this->faker->randomElement(OrderStatus::cases()),
 
             'customer_first_name' => $customer->first_name,
             'customer_last_name' => $customer->last_name,

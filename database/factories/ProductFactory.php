@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'category' => $this->faker->word(),
             'sku' => $this->faker->unique()->numerify('SKU-####'),
 
-            'image' => 'https://placehold.co/1920x800/FF5C36/FFFFFF?text=Toi-meme\nProduct',
+            'image' => '/products/product-placeholder.png',
 
             'price' => $this->faker->randomFloat(2, 20, 300),
 
