@@ -22,7 +22,7 @@ class RoleMiddleware
 
             // altrimenti controllo se il ruolo dell'utente corrente corrisponde ad uno dei ruoli richiesti
             if (!$user || !in_array($user->role, $roles)) {
-                return redirect()->route('login');
+                return redirect()->route('home');
             }
         }
 

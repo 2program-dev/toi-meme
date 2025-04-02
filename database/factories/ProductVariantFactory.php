@@ -18,9 +18,9 @@ class ProductVariantFactory extends Factory
     {
         return [
             'product_id' => 1,
-            'sku' => $this->faker->unique()->numerify('SKU-####'),
             'title' => $this->faker->colorName() . " " . $this->faker->word(),
-            'icon' => 'https://placehold.co/220x254/FF5C36/FFFFFF?text=Product\nVariant',
+            'unit_price' => $this->faker->randomFloat(2, 20, 300),
+            'from_qty' => $this->faker->numberBetween(1, 50),
         ];
     }
 }

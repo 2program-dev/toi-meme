@@ -17,7 +17,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ProductResource extends Resource
 {
@@ -57,45 +59,36 @@ class ProductResource extends Resource
                             ->helperText('apparirà sotto il nome del prodotto')
                             ->maxLength(255),
                         TextInput::make('price')
-                            ->label('Prezzo unitario')
+                            ->label('Prezzo')
                             ->required()
                             ->numeric()
                             ->default(0.00)
                             ->prefix('€'),
-                        TextInput::make('min_qty')
-                            ->label('Quantità minima acquistabile')
-                            ->numeric()
-                            ->integer()
-                            ->minValue(1)
-                            ->step(1)
-                            ->default(1),
-                        TextInput::make('step_qty')
-                            ->label('Step quantità di acquisto')
-                            ->numeric()
-                            ->integer()
-                            ->minValue(1)
-                            ->step(1)
-                            ->default(1),
-                        Forms\Components\FileUpload::make('image')
-                            ->label('Immagine del prodotto')
-                            ->directory('products')
-                            ->image()
-                            ->multiple(false)
-                            ->preserveFilenames()
-                            ->imagePreviewHeight(120)
-                            ->maxSize(1024) // KB
-                            ->required()
-                            ->columnSpan(2),
                         Forms\Components\Select::make('related_products')
                             ->label('Prodotti correlati')
                             ->multiple()
                             ->maxItems(2)
                             ->options(fn () => Product::all()->pluck('title', 'id')->toArray())
-                            ->helperText('massimo 2 prodotti')
-                            ->columnSpan(2),
+                            ->helperText('massimo 2 prodotti'),
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Immagine del prodotto')
+                            ->directory('products')
+                            ->image()
+                            ->multiple(false)
+                            ->imagePreviewHeight(250)
+                            ->maxSize(1024) // KB
+                            ->required()
+                            ->getUploadedFileNameForStorageUsing(
+                                fn (TemporaryUploadedFile $file, Forms\Get $get): string => (string) str($get('slug') . '-' . uniqid() . '.')
+                                    ->append($file->getClientOriginalExtension()),
+                            )
+                            ->deleteUploadedFileUsing(function ($file) {
+                                // cancella il vecchio file se esiste
+                                Storage::disk('public')->delete($file);
+                            })
                     ])
-                    ->columns(4),
-                Section::make('Varianti prodotto')
+                    ->columns(3),
+                Section::make('Prezzi prodotto')
                     ->collapsible()
                     ->schema([
                         // create a form fields for the product variants
@@ -103,24 +96,25 @@ class ProductResource extends Resource
                             ->relationship()
                             ->reorderable()
                             ->label('')
-                            ->maxItems(4)
                             ->schema([
                                 TextInput::make('title')
-                                    ->label('Titolo variante')
+                                    ->label('Titolo')
                                     ->required()
                                     ->maxLength(255),
-                                TextInput::make('sku')
-                                    ->label('SKU variante')
-                                    ->maxLength(255),
-                                Forms\Components\FileUpload::make('icon')
-                                    ->label('Icona')
-                                    ->directory('variant-icons')
-                                    ->image()
-                                    ->preserveFilenames()
-                                    ->imagePreviewHeight(60)
-                                    ->maxSize(512),
+                                TextInput::make('unit_price')
+                                    ->label('Prezzo unitario')
+                                    ->required()
+                                    ->numeric()
+                                    ->default(0.00)
+                                    ->prefix('€'),
+                                TextInput::make('from_qty')
+                                    ->label('Quantità minima')
+                                    ->required()
+                                    ->numeric()
+                                    ->default(1)
+                                    ->minValue(1)
                             ])
-                            ->addActionLabel("Aggiungi variante")
+                            ->addActionLabel("Aggiungi prezzo")
                             ->collapsible()
                             ->columns(3),
                     ]),
@@ -174,16 +168,6 @@ class ProductResource extends Resource
                     ->label('Prezzo')
                     ->numeric(decimalPlaces: 2)
                     ->money('EUR')
-                    ->sortable()
-                    ->grow(false),
-                TextColumn::make('min_qty')
-                    ->label('Min. qty')
-                    ->numeric()
-                    ->sortable()
-                    ->grow(false),
-                TextColumn::make('step_qty')
-                    ->label('Step qty')
-                    ->numeric()
                     ->sortable()
                     ->grow(false),
                 TextColumn::make('deleted_at')

@@ -32,8 +32,6 @@ class ProductFactory extends Factory
             'image' => 'https://placehold.co/1920x800/FF5C36/FFFFFF?text=Toi-meme\nProduct',
 
             'price' => $this->faker->randomFloat(2, 20, 300),
-            'min_qty' => $this->faker->randomElement([100, 200, 300, 400, 500]),
-            'step_qty' => $this->faker->randomElement([100, 200, 300, 400, 500]),
 
             'description' => $this->faker->text,
             'ingredients' => $this->faker->text,
