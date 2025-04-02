@@ -105,6 +105,10 @@ class OrderResource extends Resource
                                     ->numeric()
                                     ->prefix('€')
                                     ->default(0.00),
+                                //  customizazion - boolean field
+                                Forms\Components\Toggle::make('customization')
+                                    ->label('Personalizzazione')
+                                    ->nullable(),
                             ])
                             ->addActionLabel("Aggiungi prodotto all'ordine")
                             ->columns(5)
