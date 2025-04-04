@@ -30,4 +30,22 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class);
     }
 
+    public function getRelatedProductObjectsAttribute()
+    {
+        return Product::whereIn('id', $this->related_products ?? [])->get();
+    }
+
+    public function getFormattedPriceAttribute(){
+        return number_format($this->price, 2, ',', '.');
+    }
+
+    public function unitPriceBasedQuantity(int $quantity){
+        $unitPrice = $this->price;
+        foreach($this->variants()->get() as $variant){
+            if($quantity >= $variant->from_qty){
+                $unitPrice = $variant->unit_price;
+            }
+        }
+        return $unitPrice;
+    }
 }

@@ -13,13 +13,4 @@ class MainMenu extends Component{
         return view('livewire.components.main-menu');
     }
 
-    public function logout()
-    {
-        Auth::logout();
-        session()->invalidate();
-        session()->regenerateToken();
-
-        return redirect('/')->with('success', 'Logout effettuato con successo!');
-    }
-
 }

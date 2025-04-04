@@ -4,12 +4,12 @@ namespace App\Livewire\Pages;
 
 use Livewire\Component;
 
-class Home extends Component
+class Products extends Component
 {
     public function render()
     {
         $products = \App\Models\Product::all();
-        return view('livewire.pages.home', [
+        return view('livewire.pages.products', [
             'products' => $products,
         ]);
     }

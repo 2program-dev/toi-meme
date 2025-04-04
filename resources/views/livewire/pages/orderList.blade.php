@@ -1,6 +1,13 @@
 <x-utilities.main>
     <x-utilities.section>
         <x-utilities.container>
+            <div class="flex justify-end">
+                @if(Auth::check())
+                    <button wire:click="logout"
+                            class="text-sm font-semibold text-orange hover:text-orange-600 transition-colors duration-200">Esci</button>
+                @endif
+            </div>
+
             <div class="mb-4">
                 <p class="font-serif italic font-normal ~sm/lg:~text-1xl/3xl">Lista ordini</p>
             </div>

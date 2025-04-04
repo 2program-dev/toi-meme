@@ -1,7 +1,7 @@
 <ul class="{{ $menuClass }}">
     <li class="font-light">
-        <a class="underline-offset-8" href="{{ route('product') }}"
-           :class="{ 'underline': window.location.pathname == '/product' }">Prodotti</a>
+        <a class="underline-offset-8" href="{{ route('products') }}"
+           :class="{ 'underline': window.location.pathname == '/products' }">Prodotti</a>
     </li>
     <li class="font-light">
         <a class="underline-offset-8" href="{{ route('about') }}"
@@ -11,9 +11,4 @@
         <a class="underline-offset-8" href="{{ route('contacts') }}"
            :class="{ 'underline': window.location.pathname == '/contacts' }">Contatti</a>
     </li>
-    @if(Auth::check())
-        <li class="font-light">
-            <button wire:click="logout">Logout</button>
-        </li>
-    @endif
 </ul>

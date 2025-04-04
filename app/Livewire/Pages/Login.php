@@ -15,6 +15,8 @@ class Login extends Component
     #[Validate('required')]
     public $password = '';
 
+    public $remember = false;
+
     public function render()
     {
         return view('livewire.pages.login');
@@ -32,7 +34,7 @@ class Login extends Component
     {
         $this->validate();
 
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], true)) {
+        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             redirect(config('fortify.home'))->with('success', 'Login effettuato con successo!');
         }
         else {

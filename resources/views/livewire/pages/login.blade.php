@@ -29,6 +29,11 @@
                             <span class="text-red text-sm mt-1">{{ $message }}</span>
                         @enderror
 
+                        <label class="flex items-center justify-center gap-2">
+                            <input type="checkbox" wire:model.defer="remember"
+                                class="w-4 h-4 text-orange border-gray-300 rounded focus:ring-orange/50" />
+                            <span class="text-md font-bold">Ricordami</span>
+                        </label>
                     </div>
 
                     <x-utilities.button tag="button">Continua</x-utilities.button>

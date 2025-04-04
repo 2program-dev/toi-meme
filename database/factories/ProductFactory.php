@@ -42,17 +42,17 @@ class ProductFactory extends Factory
         ];
     }
 
-    public function configure(): static
-    {
-        return $this->afterCreating(function (Product $product) {
-            $productVariants = ProductVariant::factory()->count(rand(1, 2))->make();
-
-            foreach ($productVariants as $productVariant) {
-                $productVariant->product_id = $product->id;
-                $productVariant->save();
-            }
-
-            $product->save();
-        });
-    }
+//    public function configure(): static
+//    {
+//        return $this->afterCreating(function (Product $product) {
+//            $productVariants = ProductVariant::factory()->count(rand(1, 2))->make();
+//
+//            foreach ($productVariants as $productVariant) {
+//                $productVariant->product_id = $product->id;
+//                $productVariant->save();
+//            }
+//
+//            $product->save();
+//        });
+//    }
 }
