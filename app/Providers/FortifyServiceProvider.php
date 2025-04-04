@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LogoutResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,6 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
     }
 
     /**

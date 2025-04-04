@@ -31,28 +31,15 @@
                 </div>
 
                 <div class="hidden lg:flex lg:gap-x-12">
-                    <ul class="flex items-center justify-center gap-16">
-                        <li class="font-light">
-                            <a class="underline-offset-8" href="{{ route('product') }}"
-                                :class="{ 'underline': window.location.pathname == '/product' }">Prodotti</a>
-                        </li>
-                        <li class="font-light">
-                            <a class="underline-offset-8" href="{{ route('about') }}"
-                                :class="{ 'underline': window.location.pathname == '/about' }">Chi siamo</a>
-                        </li>
-                        <li class="font-light">
-                            <a class="underline-offset-8" href="{{ route('contacts') }}"
-                                :class="{ 'underline': window.location.pathname == '/contacts' }">Contatti</a>
-                        </li>
-                    </ul>
+                    <livewire:components.main-menu menuClass="flex items-center justify-center gap-16" />
                 </div>
 
                 <div class="flex flex-1 justify-end">
                     <div class="flex items-center justify-end gap-4 lg:gap-8">
-                        <a href="#" class="max-sm:hidden">
+                        <a href="/order-list" class="max-sm:hidden">
                             <x-icons.user-line :width="38" :height="38" />
                         </a>
-                        <a href="#" class="max-sm:hidden">
+                        <a href="/cart" class="max-sm:hidden">
                             <x-icons.cart-line :width="38" :height="38" />
                         </a>
 
@@ -80,20 +67,7 @@
                     <div class="mt-6 flow-root">
                         <div class="-my-6 divide-y divide-gray-500/10">
                             <div class="space-y-2 py-6">
-                                <ul class="flex items-center flex-col justify-center gap-16">
-                                    <li class="font-light">
-                                        <a class="underline-offset-8" href="{{ route('product') }}"
-                                            :class="{ 'underline': window.location.pathname == '/product' }">Prodotti</a>
-                                    </li>
-                                    <li class="font-light">
-                                        <a class="underline-offset-8" href="{{ route('about') }}"
-                                            :class="{ 'underline': window.location.pathname == '/about' }">Chi siamo</a>
-                                    </li>
-                                    <li class="font-light">
-                                        <a class="underline-offset-8" href="{{ route('contacts') }}"
-                                            :class="{ 'underline': window.location.pathname == '/contacts' }">Contatti</a>
-                                    </li>
-                                </ul>
+                                <livewire:components.main-menu menuClass="flex items-center flex-col justify-center gap-16" />
                             </div>
 
                             <div class="sm:hidden flex items-center justify-center gap-8 pt-8">
@@ -160,6 +134,27 @@
             </div>
         </div>
     </footer>
+
+    @foreach (['success', 'error'] as $msg)
+        @if(session()->has($msg))
+            <div class="fixed bottom-4 right-4 z-[9999] system-messages">
+                <div
+                    x-data="{ show: true }"
+                    x-init="setTimeout(() => show = false, 3000)"
+                    x-show="show"
+                    x-transition:leave="transition transform ease-in duration-500"
+                    x-transition:leave-start="translate-x-0 opacity-100"
+                    x-transition:leave-end="translate-x-full opacity-0"
+                    class="p-4 rounded-lg
+                {{ $msg === 'success' ? 'bg-[#d1f7da] text-[#2e7d32]' : '' }}
+                {{ $msg === 'error'   ? 'bg-[#f8d7da] text-[#842029]' : '' }}
+            ">
+                    {{ session($msg) }}
+                </div>
+            </div>
+        @endif
+    @endforeach
+
 
     @vite('resources/js/app.js')
 

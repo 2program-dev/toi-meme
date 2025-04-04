@@ -9,14 +9,25 @@
 
         <div class="mt-8 lg:mt-12">
             <x-utilities.container size="xsmall">
-                <form class="flex flex-col gap-8 lg:gap-16 w-full">
+                <form wire:submit.prevent="login" class="flex flex-col gap-8 lg:gap-16 w-full">
+                    @error('general')
+                        <span class="text-[#ff0000] text-center text-sm mt-1">{{ $message }}</span>
+                    @enderror
+
                     <div class="grid grid-cols-1 gap-y-5 gap-x-3">
                         <input
                             class="px-7 py-2.5 bg-transparent border rounded-full placeholder:text-black placeholder:font-bold focus:outline-none transition-shadow focus:ring ring-orange/25"
-                            type="email" placeholder="Email" />
+                            type="email" placeholder="Email" wire:model.defer="email" />
+                        @error('email')
+                            <span class="text-red text-sm mt-1">{{ $message }}</span>
+                        @enderror
+
                         <input
                             class="px-7 py-2.5 bg-transparent border rounded-full placeholder:text-black placeholder:font-bold focus:outline-none transition-shadow focus:ring ring-orange/25"
-                            type="password" placeholder="Password" />
+                            type="password" placeholder="Password" wire:model.defer="password" />
+                        @error('password')
+                            <span class="text-red text-sm mt-1">{{ $message }}</span>
+                        @enderror
 
                     </div>
 

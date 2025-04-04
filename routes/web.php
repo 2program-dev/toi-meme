@@ -18,8 +18,12 @@ Route::get('/', Home::class)->name('home');
 Route::get('/product', Product::class)->name('product');
 Route::get('/about', About::class)->name('about');
 Route::get('/contacts', ContactsV2::class)->name('contacts');
-Route::get('/login', Login::class)->name('login');
-Route::get('/registration', Registration::class)->name('registration');
+
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', Login::class)->name('login');
+    Route::get('/registration', Registration::class)->name('registration');
+});
+
 
 Route::middleware(['verified', 'role:customer'])->group(function () {
     Route::get('/cart', Cart::class)->name('cart');
