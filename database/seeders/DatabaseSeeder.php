@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,8 @@ class DatabaseSeeder extends Seeder
             'name' => '2Program Srl',
             'email' => 'info@2program.it',
             'password' => Hash::make('admin'),
+            'approved' => true,
+            'remember_token' => Str::random(60),
             'role' => 'admin'
         ])->markEmailAsVerified();
 

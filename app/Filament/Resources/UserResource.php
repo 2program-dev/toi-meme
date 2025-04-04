@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enum\OrderStatus;
 use App\Enum\UserRole;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
@@ -57,6 +58,17 @@ class UserResource extends Resource
                             ->placeholder('Seleziona un ruolo')
                             ->options(UserRole::options())
                             ->required(),
+                        Select::make('approved')
+                            ->label('Stato')
+                            ->placeholder('Seleziona uno stato')
+                            ->options([
+                                true => 'Approvato',
+                                false => 'Non approvato'
+                            ])
+                            ->required()
+                            ->default(true)
+                            ->reactive()
+                            ->dehydrated(fn (?bool $state): bool => filled($state)),
                     ]),
                     Section::make([
                         TextInput::make('password')
@@ -106,6 +118,22 @@ class UserResource extends Resource
                     ->formatStateUsing(fn (string $state): string => UserRole::tryFrom($state)?->label() ?? $state)
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('approved')
+                    ->label('Stato')
+                    ->badge()
+                    ->formatStateUsing(fn (bool $state): string => $state ? 'Approvato' : 'Non approvato')
+                    ->color(fn (bool $state): string => $state ? 'success' : 'danger')
+                    // action to toggle state
+                    ->action(function (User $record) {
+                        $record->update(['approved' => !$record->approved]);
+                        Notification::make()
+                            ->success()
+                            ->title('Stato aggiornato')
+                            ->body('Lo stato dell\'utente è stato aggiornato con successo.')
+                            ->send();
+                    })
+                    ->sortable()
+                    ->grow(false),
                 TextColumn::make('created_at')
                     ->label('Data di creazione')
                     ->dateTime("d F Y, H:i:s")
