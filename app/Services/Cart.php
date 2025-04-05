@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Enum\OrderStatus;
+use App\Models\Order;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 use App\Models\Product;
@@ -91,7 +93,7 @@ class Cart
                     $this->session->put(self::CART_KEY, $cart);
                 }
             } else {
-                $this->remove($productId);
+                //$this->remove($productId);
             }
 
         }
@@ -151,5 +153,63 @@ class Cart
     public function has(int $productId): bool
     {
         return $this->getContent()->has($productId);
+    }
+
+    public function checkout(){
+        $cartItems = $this->items();
+        if ($cartItems->isEmpty()) {
+            return false;
+        }
+
+        $user = auth()->user();
+        if (!$user) {
+            return false;
+        }
+        $customer = $user->customer;
+        if (!$customer) {
+            return false;
+        }
+
+        $order = Order::create([
+            'customer_id' => $customer->id,
+            'order_number' => Order::getNextInvoiceNumber(),
+            'status' => OrderStatus::ORDER_RECEIVED,
+            'subtotal' => $this->total(),
+            'total' => $this->total(),
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name' => $customer->last_name,
+            'customer_phone' => $customer->phone,
+            'customer_company' => $customer->company,
+            'customer_vat' => $customer->vat,
+            'customer_fiscal_code' => $customer->fiscal_code,
+            'customer_sdi' => $customer->sdi,
+            'customer_billing_address' => $customer->billing_address,
+            'customer_billing_zip' => $customer->billing_zip,
+            'customer_billing_city' => $customer->billing_city,
+            'customer_billing_state' => $customer->billing_state,
+            'customer_billing_country' => $customer->billing_country,
+            'customer_shipping_address' => $customer->shipping_address,
+            'customer_shipping_zip' => $customer->shipping_zip,
+            'customer_shipping_city' => $customer->shipping_city,
+            'customer_shipping_state' => $customer->shipping_state,
+            'customer_shipping_country' => $customer->shipping_country,
+        ]);
+
+        if(!$order) return false;
+
+        foreach ($cartItems as $item) {
+            $order->orderRows()->create([
+                'order_id' => $order->id,
+                'product_id' => $item->id,
+                'product_title' => $item->product->title,
+                'quantity' => $item->quantity,
+                'customization' => 0,
+                'price' => $item->price,
+                'total' => $item->subtotal,
+            ]);
+        }
+
+        $this->clear();
+        return $order;
     }
 }

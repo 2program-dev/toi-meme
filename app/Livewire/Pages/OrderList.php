@@ -9,7 +9,8 @@ class OrderList extends Component
 {
     public function render()
     {
-        return view('livewire.pages.orderlist');
+        $orders = Auth::user()->customer->orders;
+        return view('livewire.pages.orderlist', compact('orders'));
     }
 
     public function logout()

@@ -10,4 +10,10 @@ class ContactsV2 extends Component
     {
         return view('livewire.pages.contactsV2');
     }
+
+    public function sendEmail()
+    {
+        // TODO logica per inviare email
+        redirect()->route('contacts')->with('success', 'Email inviata con successo!');
+    }
 }

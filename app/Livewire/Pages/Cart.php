@@ -41,4 +41,18 @@ class Cart extends Component
         $this->items = $cart->items();
         $this->total = $cart->formatted_total();
     }
+
+    public function checkout(\App\Services\Cart $cart){
+        if($this->items->isEmpty()){
+            session()->flash('error', 'Il carrello è vuoto');
+            return;
+        }
+
+        $order = $cart->checkout();
+        if($order){
+            redirect()->route('order-list')->with('success', "Ordine $order->order_number creato con successo");
+        } else {
+            redirect()->route('cart')->with('error', "Errore durante la creazione dell'ordine");
+        }
+    }
 }

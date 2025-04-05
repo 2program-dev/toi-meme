@@ -8,7 +8,7 @@
 
         <div class="mt-8 lg:mt-12">
             <x-utilities.container size="small">
-                <form class="flex flex-col gap-8 lg:gap-16 items-center w-full">
+                <form wire:submit.prevent="sendEmail" class="flex flex-col gap-8 lg:gap-16 items-center w-full">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-5 gap-x-3">
                         <input
                             class="px-7 py-2.5 bg-transparent border rounded-full placeholder:text-black placeholder:font-bold focus:outline-none transition-shadow focus:ring ring-orange/25"

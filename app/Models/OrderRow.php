@@ -20,4 +20,14 @@ class OrderRow extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function getFormattedPriceAttribute()
+    {
+        return number_format($this->price, 2, ',', '.');
+    }
+
+    public function getFormattedTotalAttribute()
+    {
+        return number_format($this->total, 2, ',', '.');
+    }
 }

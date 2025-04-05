@@ -29,11 +29,11 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <x-utilities.action type='secondary' tag="button" color="brown" click="removeFromCart({{ $cartItem->id }})">
+                <x-utilities.action type='secondary' tag="button"  color="brown" xclick="if(confirm('Sei sicuro di voler rimuovere questo prodotto dal carrello?')) { $wire.removeFromCart({{ $cartItem->id }}) }">
                     <x-icons.delete-line />
                 </x-utilities.action>
 
-                <x-utilities.action type='secondary' tag="button" color="brown" click="decreaseQuantity({{ $cartItem->id }})">
+                <x-utilities.action type='secondary' tag="button" disabled="{{ $cartItem->quantity == $cartItem->product->variants->first()->from_qty }}" color="brown" click="decreaseQuantity({{ $cartItem->id }})">
                     <x-icons.subtract-line />
                 </x-utilities.action>
 

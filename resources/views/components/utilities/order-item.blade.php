@@ -23,7 +23,7 @@
     <div class="flex flex-auto border-y p-5 ">
         <div class="flex w-full gap-4 flex-wrap items-center">
             <div class="flex-1">
-                <a href={{ $href }} class="font-bold hover:underline">{{ $title }}</a>
+                <a href="{{ $href }}" class="font-bold hover:underline">{{ $title }}</a>
                 <p class="font-light">{{ $subtitle }}</p>
                 <p class="font-light">€ {{ $price }}</p>
                 <p class="font-light text-sm">Quantità: <b>{{ $quantity }}</b></p>
