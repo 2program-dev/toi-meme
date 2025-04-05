@@ -1,10 +1,12 @@
 <x-utilities.main>
     <x-utilities.section>
         <x-utilities.container>
-            <div class="flex justify-end">
+            <div class="flex justify-end gap-6">
                 @if(Auth::check())
+                    <a href="{{ route('edit-profile') }}"
+                            class="text-md font-semibold text-orange hover:text-orange-600 transition-colors duration-200">Modifica profilo</a>
                     <button wire:click="logout"
-                            class="text-sm font-semibold text-orange hover:text-orange-600 transition-colors duration-200">Esci</button>
+                            class="text-md font-semibold text-orange hover:text-orange-600 transition-colors duration-200">Esci</button>
                 @endif
             </div>
 
