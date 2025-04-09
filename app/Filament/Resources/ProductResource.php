@@ -112,7 +112,11 @@ class ProductResource extends Resource
                                     ->required()
                                     ->numeric()
                                     ->default(1)
-                                    ->minValue(1)
+                                    ->minValue(1),
+                                Forms\Components\Toggle::make('enable_customization')
+                                    ->label('Abilita personalizzazione')
+                                    ->default(false)
+                                    ->inline(),
                             ])
                             ->addActionLabel("Aggiungi prezzo")
                             ->collapsible()

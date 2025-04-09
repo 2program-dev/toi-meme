@@ -48,4 +48,13 @@ class Product extends Model
         }
         return $unitPrice;
     }
+
+    public function getMinQtyForCustomizationAttribute()
+    {
+        $variant = $this->variants->where('enable_customization', true)->first();
+        if ($variant) {
+            return $variant->from_qty;
+        }
+        return false;
+    }
 }

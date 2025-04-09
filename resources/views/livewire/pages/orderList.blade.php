@@ -43,7 +43,10 @@
                         <div class="bg-cream-50" x-show="expanded" x-collapse>
                             <div class="p-4 flex flex-col gap-4">
                                 @foreach($order->orderRows as $orderRow)
-                                    <x-utilities.order-item color="default" image="{{ $orderRow->product->image }}"
+                                    <x-utilities.order-item color="default"
+                                        customization="{{ $orderRow->customization }}"
+                                        href="{{ $orderRow->product ? route('product', ['slug' => $orderRow->product->slug]) : '#' }}"
+                                        image="{{ $orderRow->product ? $orderRow->product->image : '/products/product-placeholder.png' }}"
                                         title="{{ $orderRow->product_title }}" subtitle="{{ $orderRow->product->category }}" price="{{ $orderRow->formatted_price }}" quantity="{{ $orderRow->quantity }}"
                                         priceTotal="{{ $orderRow->formatted_total }}" />
                                 @endforeach

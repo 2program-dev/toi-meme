@@ -18,7 +18,9 @@
                         <p class="font-bold">€ {{ $total }}</p>
                     </div>
 
-                    <x-utilities.button click="if(confirm('Sei sicuro di voler inviare questo ordine?')) { $wire.checkout() }" tag="button" color="brown">
+                    <x-utilities.button
+                        disabled="{{ $items->isEmpty() }}"
+                        confirm="Sei sicuro di voler inviare questo ordine?" click="checkout()" tag="button" color="brown">
                         Check-out
                     </x-utilities.button>
                 </div>

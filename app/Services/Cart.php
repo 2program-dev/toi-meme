@@ -41,11 +41,24 @@ class Cart
             $cart->put($productId, [
                 'id' => $productId,
                 'quantity' => $quantity,
+                'customization' => false,
             ]);
         }
 
 
         $this->session->put(self::CART_KEY, $cart);
+    }
+
+    public function toggleCustomization(int $productId): void
+    {
+        $cart = $this->getContent();
+
+        if ($cart->has($productId)) {
+            $cartItem = $cart->get($productId);
+            $cartItem['customization'] = !$cartItem['customization'];
+            $cart->put($productId, $cartItem);
+            $this->session->put(self::CART_KEY, $cart);
+        }
     }
 
     public function update(int $productId, int $quantity): void
@@ -128,14 +141,19 @@ class Cart
         return $cart->map(function ($item) use ($products) {
             $product = $products->get($item['id']);
             $unitPriceBasedQuantity = $product->unitPriceBasedQuantity($item['quantity']) ?? $product->price;
+            $subtotal = ($unitPriceBasedQuantity ?? 0) * $item['quantity'];
+            if ($item['customization']) {
+                $subtotal += env('CUSTOMIZATION_PRICE') * $item['quantity'];
+            }
             return (object)[
                 'id' => $item['id'],
                 'quantity' => $item['quantity'],
+                'customization' => $item['customization'],
                 'product' => $product,
                 'price' => $unitPriceBasedQuantity ?? 0,
                 'price_formatted' => number_format($unitPriceBasedQuantity ?? 0, 2, ',', '.'),
-                'subtotal' => ($unitPriceBasedQuantity ?? 0) * $item['quantity'],
-                'subtotal_formatted' => number_format(($unitPriceBasedQuantity ?? 0) * $item['quantity'], 2, ',', '.'),
+                'subtotal' => $subtotal,
+                'subtotal_formatted' => number_format($subtotal, 2, ',', '.'),
             ];
         });
     }
@@ -203,7 +221,7 @@ class Cart
                 'product_id' => $item->id,
                 'product_title' => $item->product->title,
                 'quantity' => $item->quantity,
-                'customization' => 0,
+                'customization' => $item->customization,
                 'price' => $item->price,
                 'total' => $item->subtotal,
             ]);

@@ -55,4 +55,11 @@ class Cart extends Component
             redirect()->route('cart')->with('error', "Errore durante la creazione dell'ordine");
         }
     }
+
+    public function toggleCustomization(int $productId, \App\Services\Cart $cart)
+    {
+        $cart->toggleCustomization($productId);
+        $this->items = $cart->items();
+        $this->total = $cart->formatted_total();
+    }
 }

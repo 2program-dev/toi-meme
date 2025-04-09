@@ -5,7 +5,7 @@
 
 <div class="flex flex-wrap flex-col md:flex-row">
     <div @class([
-        'grid place-items-center aspect-square size-full flex-grow-0 flex-shrink-0 md:basis-[160px]',
+        'grid place-items-center aspect-square size-full flex-grow-0 flex-shrink-0 md:basis-[190px]',
         'bg-brown' => $color === 'brown',
         'bg-consider' => $color === 'consider',
         'bg-reinvigorated' => $color === 'reinvigorated',
@@ -29,7 +29,7 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <x-utilities.action type='secondary' tag="button"  color="brown" xclick="if(confirm('Sei sicuro di voler rimuovere questo prodotto dal carrello?')) { $wire.removeFromCart({{ $cartItem->id }}) }">
+                <x-utilities.action type='secondary' tag="button"  color="brown" confirm="Sei sicuro di voler rimuovere questo prodotto dal carrello?" click="removeFromCart({{ $cartItem->id }})">
                     <x-icons.delete-line />
                 </x-utilities.action>
 
@@ -44,5 +44,22 @@
                 </x-utilities.action>
             </div>
         </div>
+        @if($cartItem->product->min_qty_for_customization && $cartItem->quantity >= $cartItem->product->min_qty_for_customization)
+            <div class="flex items-center">
+                <button
+                    type="button"
+                    wire:click="toggleCustomization({{ $cartItem->id }})"
+                    role="switch"
+                    class="{{ $cartItem->customization ? 'bg-orange' : 'bg-grey' }} relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+                >
+                    <span
+                        class="{{ $cartItem->customization ? 'translate-x-5' : 'translate-x-0' }} pointer-events-none inline-block size-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+                    ></span>
+                </button>
+                <span class="ml-3 text-sm" id="customization-{{ $cartItem->id }}-label">
+                    <span class="font-medium text-gray-900">Personalizzazione (+{{ number_format(env('CUSTOMIZATION_PRICE'), 2, ',', '.') }} € / conf.)</span>
+                </span>
+            </div>
+        @endif
     </div>
 </div>
