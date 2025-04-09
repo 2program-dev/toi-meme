@@ -143,7 +143,7 @@ class Cart
             $unitPriceBasedQuantity = $product->unitPriceBasedQuantity($item['quantity']) ?? $product->price;
             $subtotal = ($unitPriceBasedQuantity ?? 0) * $item['quantity'];
             if ($item['customization']) {
-                $subtotal += env('CUSTOMIZATION_PRICE') * $item['quantity'];
+                $subtotal += config('customization_price') * $item['quantity'];
             }
             return (object)[
                 'id' => $item['id'],

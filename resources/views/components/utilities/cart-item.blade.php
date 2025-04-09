@@ -57,7 +57,7 @@
                     ></span>
                 </button>
                 <span class="ml-3 text-sm" id="customization-{{ $cartItem->id }}-label">
-                    <span class="font-medium text-gray-900">Personalizzazione (+{{ number_format(env('CUSTOMIZATION_PRICE'), 2, ',', '.') }} € / conf.)</span>
+                    <span class="font-medium text-gray-900">Personalizzazione (+{{ number_format(config('customization_price'), 2, ',', '.') }} € / conf.)</span>
                 </span>
             </div>
         @endif
