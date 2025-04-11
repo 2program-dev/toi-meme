@@ -34,7 +34,7 @@ class ContactsV2 extends Component
         ]);
 
         Mail::raw($this->buildPlainMessage(), function ($message) {
-            $message->to(config('contact_email'))
+            $message->to(config('toimeme.contact_email'))
                 ->subject($this->subject);
         });
 
