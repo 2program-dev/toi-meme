@@ -62,14 +62,14 @@
 
                             <div class="mt-4 grid grid-cols-1 *:col-span-full *:row-span-full">
                                 <div x-show="tab == 'tab1'" x-transition.opacity x-transition.duration.300ms>
-                                    <p x-show="expanded" x-collapse.min.156px>
+                                    <div x-show="expanded" x-collapse.min.156px>
                                         {!! $product->description !!}
-                                    </p>
+                                    </div>
                                 </div>
                                 <div x-show="tab == 'tab2'" x-transition.opacity x-transition.duration.300ms>
-                                    <p x-show="expanded" x-collapse.min.156px>
+                                    <div x-show="expanded" x-collapse.min.156px>
                                         {!! $product->ingredients !!}
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -96,9 +96,9 @@
                             </h4>
                         </div>
                         <div class="md:max-w-[446px]">
-                            <p>
+                            <div>
                                 {!! $product->focus_description !!}
-                            </p>
+                            </div>
                         </div>
                     </div>
                     <div class="basis-1/2">
