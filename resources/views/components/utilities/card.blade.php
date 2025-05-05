@@ -13,7 +13,7 @@
         'bg-energetic' => $color === 'energetic',
         'bg-photo' => $color === 'default',
     ])>
-        <img src="{{ Storage::disk()->url($product->image) }}" class="size-full object-contain aspect-square @[550px]:aspect-video">
+        <img src="{{ Storage::disk('prod_public')->url($product->image) }}" class="size-full object-contain aspect-square @[550px]:aspect-video">
     </div>
     <div class="py-5 px-2 border-y text-center">
         <p class="font-bold">{{ $product->title }}</p>

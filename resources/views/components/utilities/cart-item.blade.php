@@ -13,7 +13,7 @@
         'bg-energetic' => $color === 'energetic',
         'bg-photo' => $color === 'default',
     ])>
-        <img src="{{ Storage::disk()->url($cartItem->product->image) }}" class="size-full object-contain aspect-square">
+        <img src="{{ Storage::disk('prod_public')->url($cartItem->product->image) }}" class="size-full object-contain aspect-square">
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-y p-5 max-md:px-0 flex-1 items-center justify-between">
