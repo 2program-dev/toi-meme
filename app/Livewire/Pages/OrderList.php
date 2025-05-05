@@ -9,7 +9,8 @@ class OrderList extends Component
 {
     public function render()
     {
-        $customer = Auth::user()->customer;
+        $user = Auth::user();
+        $customer = $user->customer ?? null;
         $orders = collect();
 
         if ($customer && $customer->orders) {
