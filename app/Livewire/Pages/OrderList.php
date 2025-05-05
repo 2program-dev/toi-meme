@@ -18,7 +18,7 @@ class OrderList extends Component
         }
 
         $orders = compact('orders');
-        return view('livewire.pages.orderlist', $orders);
+        return view('livewire.pages.orderList', $orders);
     }
 
     public function logout()
