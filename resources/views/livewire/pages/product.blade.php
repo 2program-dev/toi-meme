@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 bg-cream">
             {{-- Product image --}}
             <div class="relative bg-photo">
-                <img src="{{ Storage::disk('prod_public')->url($product->image) }}" class="size-full object-contain">
+                <img src="{{ Storage::url($product->image) }}" class="size-full object-contain">
             </div>
 
             {{-- Product description --}}
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="basis-1/2">
-                        <img src="{{ Storage::disk('prod_public')->url($product->focus_image) }}" class="object-cover size-full">
+                        <img src="{{ Storage::url($product->focus_image) }}" class="object-cover size-full">
                     </div>
                 </div>
             </x-utilities.container>

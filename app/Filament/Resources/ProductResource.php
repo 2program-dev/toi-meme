@@ -86,7 +86,6 @@ class ProductResource extends Resource
                                 // cancella il vecchio file se esiste
                                 Storage::disk()->delete($file);
                             })
-                            ->disk('prod_public')
                     ])
                     ->columns(3),
                 Section::make('Prezzi prodotto')
@@ -149,7 +148,6 @@ class ProductResource extends Resource
                                     // cancella il vecchio file se esiste
                                     Storage::disk()->delete($file);
                                 })
-                                ->disk('prod_public')
                         ])
                 ])->columnSpanFull()
             ]);
@@ -164,7 +162,6 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Thumbnail')
-                    ->disk('prod_public')
                     ->width(80)->height(60),
                 TextColumn::make('title')
                     ->label('Nome prodotto')
