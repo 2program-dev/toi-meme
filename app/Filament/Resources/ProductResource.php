@@ -50,7 +50,13 @@ class ProductResource extends Resource
                         TextInput::make('slug')
                             ->helperText('sarà la parte finale dell\'URL del prodotto')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->unique(ignoreRecord: true)
+                            ->validationMessages(
+                                [
+                                    'unique' => 'Lo slug inserito è già in uso.',
+                                ]
+                            ),
                         TextInput::make('sku')
                             ->label('SKU')
                             ->maxLength(255),
