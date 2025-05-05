@@ -51,6 +51,7 @@ module.exports = {
             grey: '#C5C5C5',
             white: '#FFFFFF',
             black: '#000000',
+            photo: '#FFE9C6',
             transparent: 'transparent'
         },
     },

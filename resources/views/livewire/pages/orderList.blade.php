@@ -1,95 +1,60 @@
 <x-utilities.main>
     <x-utilities.section>
         <x-utilities.container>
+            <div class="flex justify-end gap-6">
+                @if(Auth::check())
+                    <a href="{{ route('edit-profile') }}"
+                            class="text-md font-semibold text-orange hover:text-orange-600 transition-colors duration-200">Modifica profilo</a>
+                    <button wire:click="logout"
+                            class="text-md font-semibold text-orange hover:text-orange-600 transition-colors duration-200">Esci</button>
+                @endif
+            </div>
+
             <div class="mb-4">
                 <p class="font-serif italic font-normal ~sm/lg:~text-1xl/3xl">Lista ordini</p>
             </div>
 
 
             <div class="flex flex-col gap-4">
-                <div x-data="{ expanded: false }">
+                @foreach($orders as $order)
+                    <div x-data="{ expanded: false }">
+                        <button @click="expanded = ! expanded"
+                            class="w-full text-left bg-cream-50 p-4 flex items-center gap-4 justify-between fle-wrap cursor-pointer">
+                            <div>
+                                <p class="italic">Ordine n. <span class="font-bold">{{ $order->formatted_order_number }}</span></p>
+                                <p class="italic text-md">Effettuato il <span class="font-bold">{{ $order->created_at->format('d/m/Y') }}</span></p>
+                                <p class="italic text-sm">Totale prodotti ordinati: <b class="font-bold">{{ count($order->orderRows) }}</b></p>
+                            </div>
 
-                    <button @click="expanded = ! expanded"
-                        class="w-full text-left bg-cream-50 p-4 flex items-center gap-4 justify-between fle-wrap cursor-pointer">
-                        <div>
-                            <p class="italic">Ordine n. <span class="font-bold">1</span></p>
-                            <p class="italic text-md">Effettuato il <span class="font-bold">21/02/2025</span></p>
-                            <p class="italic text-sm">Totale prodotti ordinati: <b class="font-bold">4</b></p>
-                        </div>
+                            <div class="flex flex-col gap-2 items-end">
+                                <p class="font-light text-right">Stato dell'ordine: <b class="font-bold">{{ $order->order_status }}</b></p>
+                                <p class="font-light">Totale ordine: <b class="font-bold">€ {{ $order->formatted_total }}</b></p>
 
-                        <div class="flex flex-col gap-2">
-                            <p class="font-light">Totale ordine: <b class="font-bold">€ 1400,00</b></p>
-
-                            <div class="inline-flex items-center gap-2">
-                                <p class="italic text-sm">Maggiori informazioni</p>
-                                <div class="inline-grid place-items-center transition-transform"
-                                    :class="expanded ? 'rotate-180' : ''">
-                                    <x-icons.arrow-bottom-line :width="16" :height="16" />
+                                <div class="inline-flex items-center gap-2">
+                                    <p class="italic text-sm">Maggiori informazioni</p>
+                                    <div class="inline-grid place-items-center transition-transform"
+                                        :class="expanded ? 'rotate-180' : ''">
+                                        <x-icons.arrow-bottom-line :width="16" :height="16" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </button>
+                        </button>
 
-                    <div class="bg-cream-50" x-show="expanded" x-collapse>
-                        <div class="p-4 flex flex-col gap-4">
-                            <x-utilities.order-item color="brown" image="/assets/products/bilanciata.png"
-                                title="Bilanciata" subtitle="Bruciagrassi" price="30.00" quantity="2"
-                                priceTotal="60.00" />
-                            <x-utilities.order-item color="consider" image="/assets/products/depurata.png"
-                                title="Depurata" subtitle="Bruciagrassi" price="30.00" quantity="2"
-                                priceTotal="60.00" />
-                            <x-utilities.order-item color="reinvigorated" image="/assets/products/rinvigorita.png"
-                                title="Rinvigorita" subtitle="Bruciagrassi" price="30.00" quantity="2"
-                                priceTotal="60.00" />
-                            <x-utilities.order-item color="radiant" image="/assets/products/raggiante.png"
-                                title="Raggiante" subtitle="Bruciagrassi" price="30.00" quantity="2"
-                                priceTotal="60.00" />
-                        </div>
-
-                    </div>
-                </div>
-
-                <div x-data="{ expanded: false }">
-
-                    <button @click="expanded = ! expanded"
-                        class="w-full text-left bg-cream-50 p-4 flex items-center gap-4 justify-between fle-wrap cursor-pointer">
-                        <div>
-                            <p class="italic">Ordine n. <span class="font-bold">1</span></p>
-                            <p class="italic text-md">Effettuato il <span class="font-bold">21/02/2025</span></p>
-                            <p class="italic text-sm">Totale prodotti ordinati: <b class="font-bold">4</b></p>
-                        </div>
-
-                        <div class="flex flex-col gap-2">
-                            <p class="font-light">Totale ordine: <b class="font-bold">€ 1400,00</b></p>
-
-                            <div class="inline-flex items-center gap-2">
-                                <p class="italic text-sm">Maggiori informazioni</p>
-                                <div class="inline-grid place-items-center transition-transform"
-                                    :class="expanded ? 'rotate-180' : ''">
-                                    <x-icons.arrow-bottom-line :width="16" :height="16" />
-                                </div>
+                        <div class="bg-cream-50" x-show="expanded" x-collapse>
+                            <div class="p-4 flex flex-col gap-4">
+                                @foreach($order->orderRows as $orderRow)
+                                    <x-utilities.order-item color="default"
+                                        customization="{{ $orderRow->customization }}"
+                                        href="{{ $orderRow->product ? route('product', ['slug' => $orderRow->product->slug]) : '#' }}"
+                                        image="{{ $orderRow->product ? $orderRow->product->image : '/products/product-placeholder.png' }}"
+                                        title="{{ $orderRow->product_title }}" subtitle="{{ $orderRow->product->category }}" price="{{ $orderRow->formatted_price }}" quantity="{{ $orderRow->quantity }}"
+                                        priceTotal="{{ $orderRow->formatted_total }}" />
+                                @endforeach
                             </div>
-                        </div>
-                    </button>
 
-                    <div class="bg-cream-50" x-show="expanded" x-collapse>
-                        <div class="p-4 flex flex-col gap-4">
-                            <x-utilities.order-item color="brown" image="/assets/products/bilanciata.png"
-                                title="Bilanciata" subtitle="Bruciagrassi" price="30.00" quantity="2"
-                                priceTotal="60.00" />
-                            <x-utilities.order-item color="consider" image="/assets/products/depurata.png"
-                                title="Depurata" subtitle="Bruciagrassi" price="30.00" quantity="2"
-                                priceTotal="60.00" />
-                            <x-utilities.order-item color="reinvigorated" image="/assets/products/rinvigorita.png"
-                                title="Rinvigorita" subtitle="Bruciagrassi" price="30.00" quantity="2"
-                                priceTotal="60.00" />
-                            <x-utilities.order-item color="radiant" image="/assets/products/raggiante.png"
-                                title="Raggiante" subtitle="Bruciagrassi" price="30.00" quantity="2"
-                                priceTotal="60.00" />
                         </div>
-
-                    </div>
                 </div>
+                @endforeach
             </div>
         </x-utilities.container>
     </x-utilities.section>
