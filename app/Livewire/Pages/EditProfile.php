@@ -36,27 +36,27 @@ class EditProfile extends Component
 
     public function mount(){
         $currentUser = auth()->user();
-        $customer = $currentUser->customer;
+        $customer = $currentUser->customer ?? null;
 
         $this->form = [
-            'first_name' => $customer->first_name,
-            'last_name' => $customer->last_name,
+            'first_name' => $customer->first_name ?? '',
+            'last_name' => $customer->last_name ?? '',
             'email' => $currentUser->email,
-            'phone' => $customer->phone,
-            'company' => $customer->company,
-            'vat' => $customer->vat,
-            'fiscal_code' => $customer->fiscal_code,
-            'sdi' => $customer->sdi,
-            'billing_address' => $customer->billing_address,
-            'billing_city' => $customer->billing_city,
-            'billing_state' => $customer->billing_state,
-            'billing_zip' => $customer->billing_zip,
-            'billing_country' => $customer->billing_country,
-            'shipping_address' => $customer->shipping_address,
-            'shipping_city' => $customer->shipping_city,
-            'shipping_state' => $customer->shipping_state,
-            'shipping_zip' => $customer->shipping_zip,
-            'shipping_country' => $customer->shipping_country,
+            'phone' => $customer->phone ?? '',
+            'company' => $customer->company ?? '',
+            'vat' => $customer->vat ?? '',
+            'fiscal_code' => $customer->fiscal_code ?? '',
+            'sdi' => $customer->sdi ?? '',
+            'billing_address' => $customer->billing_address ?? '',
+            'billing_city' => $customer->billing_city ?? '',
+            'billing_state' => $customer->billing_state ?? '',
+            'billing_zip' => $customer->billing_zip ?? '',
+            'billing_country' => $customer->billing_country ?? '',
+            'shipping_address' => $customer->shipping_address ?? '',
+            'shipping_city' => $customer->shipping_city ?? '',
+            'shipping_state' => $customer->shipping_state ?? '',
+            'shipping_zip' => $customer->shipping_zip ?? '',
+            'shipping_country' => $customer->shipping_country ?? '',
         ];
     }
 
