@@ -21,34 +21,11 @@
 
                     <hr class="my-3" />
 
-                    {{-- Type selector --}}
-{{--                    <div class="space-y-4">--}}
-{{--                        <p>Type</p>--}}
-{{--                        <div class="flex flex-wrap items-center gap-6">--}}
-{{--                            --}}{{-- Selector - Bustine --}}
-{{--                            <x-utilities.type-selector image="/type-selector-bustine.png" title="Bustine"--}}
-{{--                                id="type-bustine" name="product-selector" />--}}
-
-{{--                            <x-utilities.type-selector image="/type-selector-pillole.png" title="Pillole"--}}
-{{--                                id="type-pillole" name="product-selector" />--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
 
 
                     <div class="flex flex-wrap lg:flex-row items-center gap-4 mt-12">
                         @if(auth()->check())
                             @if(auth()->user()->approved)
-                                {{-- Select options --}}
-{{--                                <div--}}
-{{--                                    class="grid grid-cols-1 overflow-hidden grid-rows-1 items-center gap-2 border border-black rounded-full min-w-[154px] h-[52px] after:block after:row-span-full after:col-span-full after:w-[17px] after:h-[10px] after:pointer-events-none after:justify-self-end after:mr-4 after:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNyIgaGVpZ2h0PSIxMCIgZmlsbD0ibm9uZSI+PHBhdGggc3Ryb2tlPSIjMDAwIiBkPSJNMTYgMSA4LjY4MyA5IDEgMSIvPjwvc3ZnPg==')]">--}}
-{{--                                    <select--}}
-{{--                                        class="cursor-pointer appearance-none bg-transparent px-5 py-3 pr-9 size-full leading-none row-span-full col-span-full">--}}
-{{--                                        <option value="100">100</option>--}}
-{{--                                        <option value="200">200</option>--}}
-{{--                                        <option value="300">300</option>--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-                                {{-- Select options --}}
                                 <form wire:submit.prevent="addToCart" class="flex flex-wrap lg:flex-row items-center gap-4">
                                     <div class="grid grid-cols-1 overflow-hidden grid-rows-1 items-center gap-2 border border-black rounded-full h-[52px] after:block after:row-span-full after:col-span-full after:pointer-events-none after:justify-self-end after:mr-4">
                                         <input type="number" wire:model.defer="quantity" value="{{ $quantity }}" min="{{ $product->variants[0]->from_qty }}" class="cursor-pointer appearance-none outline-none bg-transparent px-5 py-3 pr-9 size-full leading-none row-span-full col-span-full" />
@@ -147,5 +124,5 @@
                 </div>
             </x-utilities.container>
         </x-utilities.section>
-    @endif;
+    @endif
 </x-utilities.main>
