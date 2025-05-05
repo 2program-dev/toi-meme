@@ -86,6 +86,7 @@ class ProductResource extends Resource
                                 // cancella il vecchio file se esiste
                                 Storage::disk('public')->delete($file);
                             })
+                            ->visibility('public')
 
                     ])
                     ->columns(3),
@@ -145,6 +146,7 @@ class ProductResource extends Resource
                                 ->preserveFilenames()
                                 ->imagePreviewHeight(120)
                                 ->maxSize(1024)
+                                ->visibility('public')
                         ])
                 ])->columnSpanFull()
             ]);
