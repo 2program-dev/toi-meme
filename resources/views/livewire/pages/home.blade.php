@@ -24,14 +24,12 @@
     <x-utilities.section>
         <x-utilities.container>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-11">
-                <x-utilities.card color="brown" image="/assets/products/bilanciata.png" title="Bilanciata"
-                    subtitle="Bruciagrassi" price="30.00" />
 
-                <x-utilities.card color="consider" image="/assets/products/depurata.png" title="Depurata"
-                    subtitle="Bruciagrassi" price="30.00" />
+                <x-utilities.card color="default" :product="$products[0]" />
 
-                <x-utilities.card color="reinvigorated" image="/assets/products/rinvigorita.png" title="Rinvigorita"
-                    subtitle="Bruciagrassi" price="30.00" />
+                <x-utilities.card color="default" :product="$products[1]" />
+
+                <x-utilities.card color="default" :product="$products[2]" />
 
                 {{-- Box full --}}
                 <div class="col-span-full max-h-[421px] overflow-hidden bg-consider">
@@ -39,8 +37,7 @@
                 </div>
 
                 {{-- Card 4 - Raggiante --}}
-                <x-utilities.card color="radiant" image="/assets/products/raggiante.png" title="Raggiante"
-                    subtitle="Bruciagrassi" price="30.00" />
+                <x-utilities.card color="default" :product="$products[3]" />
 
                 {{-- Box - Banner --}}
                 <div class="grid row-span-2 bg-grey">
@@ -62,8 +59,7 @@
                     </div>
                 </div>
 
-                <x-utilities.card color="energetic" image="/assets/products/energica.png" title="Energica"
-                    subtitle="Bruciagrassi" price="30.00" />
+                <x-utilities.card color="default" :product="$products[4]" />
             </div>
         </x-utilities.container>
     </x-utilities.section>
