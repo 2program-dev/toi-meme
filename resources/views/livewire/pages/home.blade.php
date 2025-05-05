@@ -25,11 +25,15 @@
         <x-utilities.container>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-11">
 
-                <x-utilities.card color="default" :product="$products[0]" />
-
-                <x-utilities.card color="default" :product="$products[1]" />
-
-                <x-utilities.card color="default" :product="$products[2]" />
+                @if (isset($products[0]))
+                    <x-utilities.card color="default" :product="$products[0]" />
+                @endif
+                @if (isset($products[1]))
+                    <x-utilities.card color="default" :product="$products[1]" />
+                @endif
+                @if (isset($products[2]))
+                    <x-utilities.card color="default" :product="$products[2]" />
+                @endif
 
                 {{-- Box full --}}
                 <div class="col-span-full max-h-[421px] overflow-hidden bg-consider">
@@ -37,7 +41,9 @@
                 </div>
 
                 {{-- Card 4 - Raggiante --}}
-                <x-utilities.card color="default" :product="$products[3]" />
+                @if (isset($products[3]))
+                    <x-utilities.card color="default" :product="$products[3]" />
+                @endif
 
                 {{-- Box - Banner --}}
                 <div class="grid row-span-2 bg-grey">
@@ -59,7 +65,9 @@
                     </div>
                 </div>
 
-                <x-utilities.card color="default" :product="$products[4]" />
+                @if (isset($products[4]))
+                    <x-utilities.card color="default" :product="$products[4]" />
+                @endif
             </div>
         </x-utilities.container>
     </x-utilities.section>
