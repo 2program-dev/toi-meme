@@ -84,7 +84,7 @@ class ProductResource extends Resource
                             )
                             ->deleteUploadedFileUsing(function ($file) {
                                 // cancella il vecchio file se esiste
-                                Storage::disk('public')->delete($file);
+                                Storage::disk()->delete($file);
                             })
                             ->visibility('public')
 
@@ -146,6 +146,10 @@ class ProductResource extends Resource
                                 ->preserveFilenames()
                                 ->imagePreviewHeight(120)
                                 ->maxSize(1024)
+                                ->deleteUploadedFileUsing(function ($file) {
+                                    // cancella il vecchio file se esiste
+                                    Storage::disk()->delete($file);
+                                })
                                 ->visibility('public')
                         ])
                 ])->columnSpanFull()
