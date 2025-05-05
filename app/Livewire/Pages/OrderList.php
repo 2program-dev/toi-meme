@@ -11,11 +11,11 @@ class OrderList extends Component
     {
         $customer = Auth::user()->customer;
         if ($customer && $customer->orders) {
-            $orders = $customer->orders->collect()->sortByDesc('created_at');
+            $orders = compact($customer->orders->sortByDesc('created_at'));
         } else {
             $orders = collect();
         }
-        return view('livewire.pages.orderlist', compact('orders'));
+        return view('livewire.pages.orderlist', $orders);
     }
 
     public function logout()
