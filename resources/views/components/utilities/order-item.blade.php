@@ -19,7 +19,7 @@
         'bg-radiant' => $color === 'radiant',
         'bg-energetic' => $color === 'energetic',
     ])>
-        <img src="{{ Storage::get($image) }}" class="size-full object-contain aspect-square">
+        <img src="{{ Storage::disk()->url($image) }}" class="size-full object-contain aspect-square">
     </div>
     <div class="flex flex-auto border-y p-5 ">
         <div class="flex w-full gap-4 flex-wrap items-center">
