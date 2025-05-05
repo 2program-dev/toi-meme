@@ -10,8 +10,11 @@ class OrderList extends Component
     public function render()
     {
         $customer = Auth::user()->customer;
-        $orders = $customer->orders->collect();
-        $orders = $orders->sortByDesc('created_at');
+        if ($customer && $customer->orders) {
+            $orders = $customer->orders->collect()->sortByDesc('created_at');
+        } else {
+            $orders = collect();
+        }
         return view('livewire.pages.orderlist', compact('orders'));
     }
 
