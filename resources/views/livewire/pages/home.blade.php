@@ -68,6 +68,12 @@
                 @if (isset($products[4]))
                     <x-utilities.card color="default" :product="$products[4]" />
                 @endif
+
+                @if($products->count() > 5)
+                    @foreach($products->slice(5) as $product)
+                        <x-utilities.card color="default" :product="$product" />
+                    @endforeach
+                @endif
             </div>
         </x-utilities.container>
     </x-utilities.section>
