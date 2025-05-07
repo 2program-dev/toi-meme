@@ -14,13 +14,16 @@
                                     class="font-serif italic font-normal">un
                                     patto.</span></h1>
                             <div class="max-w-[446px]">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum
-                                    has
-                                    been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer
-                                    took a
-                                    galley of type and scrambled it to make a type specimen book. </p>
+                                <p class="mb-3">Sappiamo che il mondo della bellezza può essere complicato e pieno di promesse difficili da mantenere.
+                                    Ma Toi Meme è diverso. Non vendiamo illusioni, ma integratori pensati per supportare il tuo benessere in modo concreto e semplice.
+                                    Niente trucchi e niente false promesse, il nostro impegno è offrirti solo ciò che funziona davvero.
+                                </p>
+                                <p class="mb-3">
+                                    Quando parleremo di integratori, ti diremo sempre le cose come stanno. Senza sminuire nulla, ma senza neanche indorare la pillola.
+                                    Al massimo, ti inviteremo a mandarla giù con un bel sorso d’acqua. Niente "Mai più unghie fragili!", niente "Il segreto per una pelle splendente!", niente "Capelli fortissimi, capelli bellissimi!". No, zero, nein.
+                                    Cosa chiediamo in cambio? Che tu sia determinata a trovare il tuo benessere.
+                                    Che tu faccia la tua parte, con pazienza e costanza. Perché gli integratori non fanno miracoli, ma se diventano un’abitudine i risultati arrivano.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -59,12 +62,13 @@
             <div class="flex flex-col md:flex-row md:items-center gap-x-20 gap-y-4">
                 <div class="basis-1/2">
                     <div class="md:max-w-[379px] ~sm/lg:~mb-4/6">
-                        <h4 class="~sm/lg:~text-1xl/3xl">Formulista e cura degli ingredienti</h4>
+                        <h4 class="~sm/lg:~text-1xl/3xl">Dietro ogni formula, un’esperta</h4>
                     </div>
                     <div class="md:max-w-[446px]">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book.</p>
+                        <p>Susanna, la nostra formulista, non lascia nulla al caso. Ogni ingrediente che
+                            trovi nei nostri integratori è selezionato con cura, testato e scelto per
+                            garantirti solo il meglio per il tuo benessere. Perché per noi qualità e
+                            attenzione ai dettagli sono una missione, non un'opzione.</p>
                     </div>
                 </div>
                 <div class="basis-1/2">
