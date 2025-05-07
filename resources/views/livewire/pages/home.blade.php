@@ -87,12 +87,15 @@
                 </div>
                 <div class="basis-1/2">
                     <div class="~sm/lg:~mb-4/6">
-                        <h4 class="~sm/lg:~text-1xl/3xl">Focus ingredienti di alta qualità</h4>
+                        <h4 class="~sm/lg:~text-1xl/3xl">Ingredienti che parlano da sé e fanno parlare di sé</h4>
                     </div>
                     <div class="md:max-w-[446px]">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book. </p>
+                        <p>Tutti i nostri ingredienti sono scelti con un solo obiettivo: proteggere la
+                            tua bellezza dall’interno. Niente fronzoli, solo attivi naturali e potenti. Ogni
+                            formula è studiata per lavorare in sintonia con il tuo corpo, sostenendo la tua
+                            bellezza e il tuo benessere in modo concreto e visibile. Essenziale, efficace,
+                            autentico – perché crediamo che prendersi cura di sé debba essere semplice e
+                            reale, proprio come te.</p>
                     </div>
                 </div>
             </div>

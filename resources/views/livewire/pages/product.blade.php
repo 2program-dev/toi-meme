@@ -62,12 +62,12 @@
 
                             <div class="mt-4 grid grid-cols-1 *:col-span-full *:row-span-full">
                                 <div x-show="tab == 'tab1'" x-transition.opacity x-transition.duration.300ms>
-                                    <div x-show="expanded" x-collapse.min.156px>
+                                    <div class="description-content" x-show="expanded" x-collapse.min.156px>
                                         {!! $product->description !!}
                                     </div>
                                 </div>
                                 <div x-show="tab == 'tab2'" x-transition.opacity x-transition.duration.300ms>
-                                    <div x-show="expanded" x-collapse.min.156px>
+                                    <div class="ingredients-content" x-show="expanded" x-collapse.min.156px>
                                         {!! $product->ingredients !!}
                                     </div>
                                 </div>
