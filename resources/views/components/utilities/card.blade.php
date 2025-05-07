@@ -18,6 +18,11 @@
     <div class="py-5 px-2 border-y text-center">
         <p class="font-bold">{{ $product->title }}</p>
         <p class="font-light">{{ $product->subtitle }}</p>
-        <p class="font-light">€ {{ $product->formatted_price }}</p>
+        <p class="font-light">
+            @if($product->original_price)
+                <span class="line-through">&euro; {{ $product->original_price }}</span>
+            @endif
+            € {{ $product->formatted_price }}
+        </p>
     </div>
 </a>

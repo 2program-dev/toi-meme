@@ -16,6 +16,9 @@
                             {{ $product->title }}
                         </h1>
                         <p>{{ $product->category }}</p>
+                        @if($product->original_price)
+                            <p>Prezzo di listino: <span class="line-through">&euro; {{ $product->original_price }}</span></p>
+                        @endif
                         <p>€ {{ $product->formatted_price }} - quantità minima {{ $product->variants[0]->from_qty }}pz</p>
                     </div>
 

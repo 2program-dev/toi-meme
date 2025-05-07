@@ -70,6 +70,11 @@ class ProductResource extends Resource
                             ->numeric()
                             ->default(0.00)
                             ->prefix('€'),
+                        TextInput::make('original_price')
+                            ->helperText('questo prezzo verrà mostrato come prezzo orignale barrato')
+                            ->label('Prezzo di listino')
+                            ->numeric()
+                            ->prefix('€'),
                         Forms\Components\Select::make('related_products')
                             ->label('Prodotti correlati')
                             ->multiple()
@@ -183,6 +188,11 @@ class ProductResource extends Resource
                     ->numeric(decimalPlaces: 2)
                     ->money('EUR')
                     ->sortable()
+                    ->grow(false),
+                TextColumn::make('original_price')
+                    ->label('Prezzo di listino')
+                    ->numeric(decimalPlaces: 2)
+                    ->money('EUR')
                     ->grow(false),
                 TextColumn::make('deleted_at')
                     ->label('Data eliminazione')
