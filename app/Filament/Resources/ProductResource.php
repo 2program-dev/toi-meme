@@ -6,11 +6,13 @@ use App\Filament\CustomFields\BasicEditorField;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use App\Models\User;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -35,6 +37,11 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Toggle::make('available')
+                    ->label('Disponibile')
+                    ->default(true)
+                    ->inline()
+                    ->helperText('se non selezionato il prodotto non sarà acquistabile e verrà mostrata una scritta "coming soon"'),
                 Section::make('Scheda prodotto')
                     ->schema([
                         TextInput::make('title')
@@ -193,6 +200,20 @@ class ProductResource extends Resource
                     ->label('Prezzo di listino')
                     ->numeric(decimalPlaces: 2)
                     ->money('EUR')
+                    ->grow(false),
+                TextColumn::make('available')
+                    ->label('Disponibile')
+                    ->badge()
+                    ->formatStateUsing(fn (bool $state): string => $state ? 'Disponibile' : 'Non disponibile')
+                    ->color(fn (bool $state): string => $state ? 'success' : 'danger')
+                    ->action(function (Product $record) {
+                        $record->update(['available' => !$record->available]);
+                        Notification::make()
+                            ->success()
+                            ->title('Disponibilità aggiornata')
+                            ->send();
+                    })
+                    ->sortable()
                     ->grow(false),
                 TextColumn::make('deleted_at')
                     ->label('Data eliminazione')

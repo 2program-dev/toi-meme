@@ -27,26 +27,30 @@
 
 
                     <div class="flex flex-wrap lg:flex-row items-center gap-4 mt-12">
-                        @if(auth()->check())
-                            @if(auth()->user()->approved)
-                                <form wire:submit.prevent="addToCart" class="flex flex-wrap lg:flex-row items-center gap-4">
-                                    <div class="grid grid-cols-1 overflow-hidden grid-rows-1 items-center gap-2 border border-black rounded-full h-[52px] after:block after:row-span-full after:col-span-full after:pointer-events-none after:justify-self-end after:mr-4">
-                                        <input type="number" wire:model.defer="quantity" value="{{ $quantity }}" min="{{ $product->variants[0]->from_qty }}" class="cursor-pointer appearance-none outline-none bg-transparent px-5 py-3 pr-9 size-full leading-none row-span-full col-span-full" />
-                                    </div>
+                        @if($available)
+                            @if(auth()->check())
+                                @if(auth()->user()->approved)
+                                    <form wire:submit.prevent="addToCart" class="flex flex-wrap lg:flex-row items-center gap-4">
+                                        <div class="grid grid-cols-1 overflow-hidden grid-rows-1 items-center gap-2 border border-black rounded-full h-[52px] after:block after:row-span-full after:col-span-full after:pointer-events-none after:justify-self-end after:mr-4">
+                                            <input type="number" wire:model.defer="quantity" value="{{ $quantity }}" min="{{ $product->variants[0]->from_qty }}" class="cursor-pointer appearance-none outline-none bg-transparent px-5 py-3 pr-9 size-full leading-none row-span-full col-span-full" />
+                                        </div>
 
-                                    <div class="lg:min-w-[375px] *:w-full">
-                                        <x-utilities.button tag="button">Aggiungi al carrello</x-utilities.button>
-                                    </div>
-                                </form>
+                                        <div class="lg:min-w-[375px] *:w-full">
+                                            <x-utilities.button tag="button">Aggiungi al carrello</x-utilities.button>
+                                        </div>
+                                    </form>
+                                @else
+                                    <p class="text-[#FF0000]">Devi essere approvato per poter acquistare i prodotti</p>
+                                @endif
                             @else
-                                <p class="text-[#FF0000]">Devi essere approvato per poter acquistare i prodotti</p>
+                                <div class="lg:min-w-[375px] *:w-full">
+                                    <a href="/login">
+                                        <x-utilities.button tag="button">Accedi per acquistare</x-utilities.button>
+                                    </a>
+                                </div>
                             @endif
                         @else
-                            <div class="lg:min-w-[375px] *:w-full">
-                                <a href="/login">
-                                    <x-utilities.button tag="button">Accedi per acquistare</x-utilities.button>
-                                </a>
-                            </div>
+                            <p class="text-brown font-bold">Al momento il prodotto non è disponibile.</p>
                         @endif
                     </div>
 

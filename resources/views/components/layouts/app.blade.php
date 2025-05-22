@@ -95,21 +95,15 @@
 
                 <div class="flex flex-col gap-4 @[488px]:text-right">
                     <ul class="font-medium text-sm">
-                        <li><b>Toi Meme</b></li>
-                        <li>xxxxxxx</li>
-                        <li>xxxxxxxxxxxxx</li>
-                        <li>toimeme@xxxxx.com</li>
+                        <li><b>Toi Meme Srl</b></li>
+                        <li>Via Carlo Crivelli 15/1 -20122 Milano (MI)</li>
+                        <li>info@toi-meme.com</li>
                     </ul>
 
                     <ul class="flex items-center @[488px]:justify-end gap-6">
                         <li>
-                            <a href="">
+                            <a href="https://www.instagram.com/toimemesrl/" target="_blank">
                                 <x-icons.ig-line :width="31" :height="31" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <x-icons.fb-line :width="31" :height="31" />
                             </a>
                         </li>
                     </ul>
@@ -117,7 +111,7 @@
             </div>
 
             <div class="flex flex-wrap justify-between gap-4 mt-10">
-                <small class="font-semibold text-base">©2024 Loremipsum. All rights reserved</small>
+                <small class="font-semibold text-base">©2025 Loremipsum. All rights reserved</small>
 
                 <ul class="flex flex-wrap items-center gap-y-2 gap-x-8 text-base">
                     <li>

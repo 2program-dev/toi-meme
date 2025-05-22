@@ -2,7 +2,7 @@
     <x-utilities.section>
         <x-utilities.container>
             <h1 class="~sm/lg:~text-[2.5rem]/4xl text-center leading-tight">
-                Vuoi sapere di più <br /> <span class="italic font-normal font-serif">sui nostri prodotti</span>
+                Vuoi sapere di più <br /> <span class="italic font-normal font-serif">sui nostri prodotti?</span>
             </h1>
         </x-utilities.container>
 

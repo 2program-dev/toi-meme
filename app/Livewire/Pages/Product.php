@@ -10,12 +10,14 @@ class Product extends Component
     public $slug;
     public $product;
     public $quantity = 1;
+    public $available = false;
 
     public function mount($slug)
     {
         $this->slug = $slug;
         $this->product = \App\Models\Product::where('slug', $slug)->firstOrFail();
         $this->quantity = $this->product->variants->first()->from_qty;
+        $this->available = $this->product->available;
     }
 
     public function render()

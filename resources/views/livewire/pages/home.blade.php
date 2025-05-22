@@ -1,9 +1,9 @@
 <x-utilities.main>
     {{-- Hero --}}
-    <x-utilities.section class="overflow-y-hidden" hasSpace={{ false }}>
-        <div class="min-h-[75vh] overflow-hidden relative">
-            <img src="{{ asset('/assets/hero-homepage-prodotti.jpg') }}"
-                class="size-full object-top object-cover absolute inset-0">
+    <x-utilities.section class="overflow-y-hidden bg-gradient-to-t from-[#f4e3d0] to-[#c49477]" hasSpace={{ false }}>
+        <div class=" overflow-hidden relative">
+            <img src="{{ asset('/assets/hero-homepage-prodotti-v2.png') }}"
+                class="w-full h-auto object-top object-cover  inset-0">
         </div>
     </x-utilities.section>
 
@@ -46,7 +46,7 @@
                 @endif
 
                 {{-- Box - Banner --}}
-                <div class="grid row-span-2 bg-grey">
+                <div class="grid row-span-2 bg-cream">
                     <div class="py-5 px-4 grid place-items-center">
                         <div class="text-center space-y-4">
                             <p class="~sm/lg:~text-xl/2xl leading-none">
@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="mt-6">
-                                <x-utilities.button border size="sm">Lascia la mail</x-utilities.button>
+                                <x-utilities.button href="{{ route('contacts') }}" border size="sm">Lascia la mail</x-utilities.button>
                             </div>
                         </div>
                     </div>
