@@ -19,7 +19,28 @@
                         @if($product->original_price)
                             <p>Prezzo di listino: <span class="line-through">&euro; {{ $product->original_price }}</span></p>
                         @endif
-                        <p>€ {{ $product->formatted_price }} - quantità minima {{ $product->variants[0]->from_qty }}pz</p>
+                        <p><strong>€ {{ $product->formatted_price }}</strong> - quantità minima {{ $product->variants[0]->from_qty }}pz</p>
+
+                        @if( $product->variants->count() > 1 )
+                            <div>
+                                <table class="w-full">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left text-sm text-gray-600">Quantità</th>
+                                            <th class="text-left text-sm text-gray-600">Prezzo unitario</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($product->variants as $variant)
+                                            <tr class="border-b border-radiant">
+                                                <td class="p-1 text-sm text-gray-600">a partire da {{ $variant->from_qty }} pz</td>
+                                                <td class="p-1 text-sm text-gray-600">€ {{ number_format($variant->unit_price, 2, ',','.') }} / pz</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                     </div>
 
                     <hr class="my-3" />
