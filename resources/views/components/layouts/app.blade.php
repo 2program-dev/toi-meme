@@ -115,7 +115,7 @@
 
                 <ul class="flex flex-wrap items-center gap-y-2 gap-x-8 text-base">
                     <li>
-                        <a href="#" class="font-semibold">
+                        <a href="{{ asset('/assets/privacy-policy.pdf') }}" target="_blank" class="font-semibold">
                             Privacy Policy
                         </a>
                     </li>
