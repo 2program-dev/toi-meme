@@ -1,66 +1,341 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# TOI-MEME
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Applicazione web e-commerce sviluppata con Laravel 11, Livewire 3 e Filament per la gestione di ordini e prodotti.
 
-## About Laravel
+## 📋 Requisiti di Sistema
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Prima di iniziare, assicurati di avere installato:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   **PHP** >= 8.2
+-   **Composer** (ultima versione)
+-   **Node.js** >= 18.x e **npm**
+-   **PostgreSQL** >= 13 (o MySQL 8.0 se preferisci)
+-   **Git**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Installazione
 
-## Learning Laravel
+### 1. Estrai l'Archivio del Progetto
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Estrai il file ZIP del progetto in una directory di tua scelta:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+unzip toi-meme.zip
+cd toi-meme
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Installa le Dipendenze PHP
 
-## Laravel Sponsors
+```bash
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. Installa le Dipendenze JavaScript
 
-### Premium Partners
+```bash
+npm install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 4. Configura il File di Ambiente
 
-## Contributing
+Copia il file `.env.example` e rinominalo in `.env`:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cp .env.example .env
+```
 
-## Code of Conduct
+Modifica il file `.env` con le tue configurazioni:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```env
+APP_NAME="TOI-MEME"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost
 
-## Security Vulnerabilities
+# Database Configuration
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=toi_meme
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Mail Configuration (opzionale per development)
+MAIL_MAILER=log
+```
 
-## License
+### 5. Genera la Chiave dell'Applicazione
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan key:generate
+```
+
+### 6. Crea il Database
+
+Crea un database PostgreSQL chiamato `toi_meme` (o il nome che hai specificato nel file `.env`):
+
+```bash
+# Usando psql
+createdb toi_meme
+
+# Oppure tramite client PostgreSQL
+```
+
+### 7. Esegui le Migrazioni
+
+```bash
+php artisan migrate
+```
+
+Se vuoi popolare il database con dati di esempio:
+
+```bash
+php artisan db:seed
+```
+
+### 8. Crea il Link Simbolico per lo Storage
+
+```bash
+php artisan storage:link
+```
+
+### 9. Compila gli Asset Frontend
+
+Per development:
+
+```bash
+npm run dev
+```
+
+Per production:
+
+```bash
+npm run build
+```
+
+## 🏃 Avvio del Progetto
+
+### Metodo 1: Comando Composer (Consigliato per Development)
+
+Questo comando avvia simultaneamente server, queue worker, logs e Vite:
+
+```bash
+composer dev
+```
+
+Questo eseguirà in parallelo:
+
+-   Server Laravel (http://localhost:8000)
+-   Queue worker
+-   Log viewer (Pail)
+-   Vite dev server (hot reload)
+
+### Metodo 2: Comandi Separati
+
+In terminali separati, esegui:
+
+```bash
+# Terminal 1 - Server Laravel
+php artisan serve
+
+# Terminal 2 - Vite (per hot reload CSS/JS)
+npm run dev
+
+# Terminal 3 - Queue Worker (opzionale)
+php artisan queue:listen
+
+# Terminal 4 - Logs (opzionale)
+php artisan pail
+```
+
+L'applicazione sarà disponibile su: **http://localhost:8000**
+
+## 📁 Struttura del Progetto
+
+```
+toi-meme/
+├── app/
+│   ├── Actions/          # Business logic e azioni
+│   ├── Enum/            # Enumerazioni
+│   ├── Filament/        # Admin panel Filament
+│   ├── Http/            # Controllers e Middleware
+│   ├── Livewire/        # Componenti Livewire (Frontend)
+│   │   ├── Components/  # Componenti riutilizzabili
+│   │   └── Pages/       # Pagine dell'applicazione
+│   ├── Models/          # Eloquent Models
+│   └── Services/        # Servizi applicativi
+├── config/              # File di configurazione
+├── database/
+│   ├── migrations/      # Migrazioni database
+│   ├── seeders/         # Seeders
+│   └── factories/       # Factory per test
+├── public/              # File pubblici (entry point)
+├── resources/
+│   ├── css/            # File CSS
+│   ├── js/             # File JavaScript
+│   └── views/          # Template Blade
+├── routes/              # Definizione routes
+└── storage/             # File generati e logs
+```
+
+## 🎨 Modificare il Frontend
+
+### Dove Trovare i File Frontend
+
+Il frontend dell'applicazione è costruito principalmente con **Livewire 3**, **Blade** e **Tailwind CSS**. Ecco dove trovare i file da modificare:
+
+#### 1. **Componenti Livewire** (`app/Livewire/`)
+
+I componenti Livewire gestiscono la logica e l'interattività delle pagine:
+
+-   **Pagine**: `app/Livewire/Pages/`
+
+    -   `Home.php` - Homepage
+    -   `Products.php` - Lista prodotti
+    -   `Product.php` - Dettaglio prodotto
+    -   `Cart.php` - Carrello
+    -   `Login.php` - Login
+    -   `Registration.php` - Registrazione
+    -   `OrderList.php` - Lista ordini
+    -   `Contacts.php` / `ContactsV2.php` - Pagina contatti
+    -   `About.php` - Chi siamo
+    -   `EditProfile.php` - Modifica profilo
+
+-   **Componenti**: `app/Livewire/Components/`
+    -   `MainMenu.php` - Menu principale
+
+#### 2. **Template Blade** (`resources/views/`)
+
+I template Blade definiscono la struttura HTML:
+
+-   **Livewire Views**: `resources/views/livewire/`
+
+    -   `pages/` - Template delle pagine Livewire
+    -   `components/` - Template dei componenti Livewire
+
+-   **Componenti Blade**: `resources/views/components/`
+    -   `layouts/` - Layout principali dell'applicazione
+    -   `sections/` - Sezioni riutilizzabili
+    -   `icons/` - Icone SVG
+    -   `utilities/` - Utility components
+
+#### 3. **Stili CSS** (`resources/css/`)
+
+-   `resources/css/app.css` - File CSS principale (Tailwind CSS)
+
+Per modificare gli stili:
+
+-   Usa le classi Tailwind direttamente nei template Blade
+-   Aggiungi CSS personalizzato in `app.css` se necessario
+
+#### 4. **JavaScript** (`resources/js/`)
+
+-   `resources/js/app.js` - Entry point JavaScript
+-   `resources/js/bootstrap.js` - Configurazione Axios e librerie
+
+#### 5. **Configurazione Tailwind CSS**
+
+-   `tailwind.config.js` - Configurazione Tailwind (colori, font, breakpoint, ecc.)
+-   `postcss.config.js` - Configurazione PostCSS
+
+#### 6. **Configurazione Vite**
+
+-   `vite.config.js` - Configurazione del build tool Vite
+
+### Workflow per Modifiche Frontend
+
+1. **Modifica un componente Livewire**:
+
+    - Logica PHP: `app/Livewire/Pages/NomeComponente.php`
+    - Template: `resources/views/livewire/pages/nome-componente.blade.php`
+
+2. **Modifica gli stili**:
+
+    - Usa classi Tailwind nei file `.blade.php`
+    - Oppure aggiungi CSS custom in `resources/css/app.css`
+
+3. **Vedi le modifiche in tempo reale**:
+
+    - Assicurati che `npm run dev` sia in esecuzione
+    - Vite farà hot reload automatico delle modifiche
+
+4. **Build per produzione**:
+    ```bash
+    npm run build
+    ```
+
+## 🛠️ Stack Tecnologico
+
+### Backend
+
+-   **Laravel** 11.44.7 - Framework PHP
+-   **Livewire** 3.6.4 - Framework full-stack reattivo
+-   **Filament** 3.3+ - Admin panel
+-   **Laravel Fortify** 1.25.4 - Autenticazione
+-   **PostgreSQL** - Database
+
+### Frontend
+
+-   **Tailwind CSS** 4.0.7 - Framework CSS utility-first
+-   **Livewire Flux** 2.6.0 - Componenti UI
+-   **Vite** 6.0.2 - Build tool e dev server
+-   **Axios** - HTTP client
+
+## 📝 Comandi Utili
+
+### Artisan
+
+```bash
+# Pulire cache
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
+# Creare un nuovo componente Livewire
+php artisan make:livewire NomeComponente
+
+# Creare una migration
+php artisan make:migration create_table_name
+
+# Formattare il codice (Laravel Pint)
+./vendor/bin/pint
+
+# Visualizzare le route
+php artisan route:list
+
+# Accedere a Tinker (REPL)
+php artisan tinker
+```
+
+### NPM
+
+```bash
+# Development con hot reload
+npm run dev
+
+# Build per produzione
+npm run build
+```
+
+## 🐳 Docker (Opzionale)
+
+Il progetto include una configurazione Docker Compose con Laravel Sail:
+
+```bash
+# Avvia i container
+./vendor/bin/sail up -d
+
+# Esegui comandi Artisan
+./vendor/bin/sail artisan migrate
+
+# Esegui comandi npm
+./vendor/bin/sail npm run dev
+```
+
+## 📄 Licenza
+
+Questo progetto è proprietario.
+
+## 👥 Supporto
+
+Per supporto o domande, contatta il team di sviluppo.
